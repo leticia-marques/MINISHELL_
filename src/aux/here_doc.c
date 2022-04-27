@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 16:51:51 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:25:39 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,14 @@ int	here_doc(char *delimiter)
 	int i;
 
 	signal(SIGINT, SIG_IGN);
-
 	if (pipe(fd) == 1)
 	{
 		perror("Error:");
 		return (errno);
 	}
 	i = fork();
-	dup2(vars->save_stdin, 0);
-	dup2(vars->save_stdout, 1);
+	// dup2(vars->save_stdin, 0);
+	// dup2(vars->save_stdout, 1);
 	if (i == 0)
 	{
 		child_process(fd, delimiter);

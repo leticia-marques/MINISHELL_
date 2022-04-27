@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 16:50:41 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/27 18:16:18 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,23 @@ static void	init_cmd_fd(t_node **cmd)
 int	check_argv(t_node **cmd, t_input *src)
 {
 	int	i;
+	char	*str;
 
+	str = (*cmd)->first_arg->val.str;
 	i = -1;
 	init_cmd_fd(cmd);
 	if (!(*cmd)->first_arg)
 		return (0);
-	else if (ft_strncmp((*cmd)->first_arg->val.str, "<<", 2) == 0)
+	else if (ft_strncmp(str, "<<", 2) == 0)
 		i = here_doc_call(cmd);
-	else if (ft_strncmp((*cmd)->first_arg->val.str, "<", 1) == 0)
+	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
+	else if (ft_strchr(str, '<') == 0 || ft_strchr(str, '>') == 0)
+		i = check_outfile(cmd);
 	else
 	{
 		check_exit_expansion(cmd);
 		i = check_builtin(cmd, src);
-		i = check_outfile(cmd);
 	}
 	if (i != -1)
 		return (i);
