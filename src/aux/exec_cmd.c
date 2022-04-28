@@ -3,21 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:52:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:37:27 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 15:06:04 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
-void	signal_to_cat(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	return ;
-}
 
 static void	child_process(t_node *cmd, char **command, char **envp, int fd[2])
 {

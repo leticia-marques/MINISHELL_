@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 19:55:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:11:16 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 14:59:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	check_syntax_loop(t_node *aux, char *tmp)
 {
+	char	*str;
+
 	while (aux)
 	{
 		str = aux->val.str;
@@ -34,18 +36,19 @@ static int	check_syntax_loop(t_node *aux, char *tmp)
 		aux = aux->next;
 		tmp = "";
 	}
+	return (1);
 }
 
 int	check_syntax_error(t_node **cmd)
 {
 	t_node	*aux;
 	char	*tmp;
-	char	*str;
+	int		i;
 
 	aux = (*cmd)->first_arg;
 	if (ft_strcmp(aux->val.str, "echo") == 0)
 		return (1);
 	tmp = "";
-	check_syntax_loop(aux, tmp);
-	return (1);
+	i = check_syntax_loop(aux, tmp);
+	return (i);
 }

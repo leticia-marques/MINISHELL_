@@ -1,5 +1,11 @@
 #include"minishell.h"
 
+void	signal_to_cat(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	return ;
+}
 static void	parent_process(char *cmd_path, char **command)
 {
 	waitpid(vars->pid, &vars->w_status, 0);

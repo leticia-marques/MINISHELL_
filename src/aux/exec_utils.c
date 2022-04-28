@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:01:54 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 04:34:53 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:02:42 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	**extract_cmd(t_node *cmd)
 
 	arg = cmd->first_arg;
 	i = 0;
-	command = malloc(sizeof(char *) * 256);
+	command = malloc(sizeof(char *) * cmd->args + 1);
 	i = extract_loop(arg, command);
 	command[++i] = NULL;
 	return (command);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 00:05:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:33:40 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 14:49:57 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ static void	get_quotes(t_token_holder *holder, t_input *src, \
 	}
 }
 
-static void	lexer_loop(t_token_holder *holder, t_input *src, \
-t_token *end_token, int *c)
+static void	lexer_loop(t_token_holder *holder, t_input *src, char *c)
 {
 	while (*c != -1)
 	{
@@ -79,7 +78,7 @@ t_token *end_token)
 		stop_parser(end_token);
 	if (c == 0 || c == -1)
 		return ;
-	lexer_loop(holder, src, end_token, &c);	
+	lexer_loop(holder, src, &c);
 }
 
 t_token	*tokenizer(t_input *src, t_token_holder *holder, t_token *end_token)

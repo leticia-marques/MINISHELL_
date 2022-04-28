@@ -9,7 +9,7 @@ AUX_FILES+= here_doc.c check_argv.c exec_utils.c
 AUX_FILES+= var_expansion.c var_expansion_utils.c
 AUX_FILES+= check_file.c call_funcs.c filter_cmd.c signals.c
 AUX_FILES+= read_infile.c export.c unset.c export_utils.c cd.c exit_builtin.c
-AUX_FILES+= check_echo.c syntax_error.c
+AUX_FILES+= check_echo.c syntax_error.c last_cmd.c
 PARSER_FILES = scanner_utils.c tokenizer.c parser.c node.c set_value_str.c
 
 AUX_PATH = $(addprefix $(AUX_DIR)/, $(AUX_FILES))

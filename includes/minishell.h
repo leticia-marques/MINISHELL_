@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:23:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:36:36 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 14:52:07 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct  s_vars
 	char	old_dir[1024];
 }               t_vars;
 
-extern t_vars *g_vars;
+extern t_vars *vars;
 
 void	init_vars(char **envp);
 //tokenizer structs
@@ -129,6 +129,14 @@ typedef struct	s_filter
 	t_input			src;
 	t_token_holder	holder;
 }				t_filter;
+
+typedef struct s_parser
+{
+	t_node	*cmd;
+	t_node	*word;
+	t_token	end_token;
+	t_token	*token;
+}			t_parser;
 
 //node functions
 t_node  *new_node(t_command_type type);
