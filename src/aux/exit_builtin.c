@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/25 17:02:34 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:55:52 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	exit_builtin(t_node *cmd)
 		if (ft_isdigit(cmd->first_arg->next->val.str[i]) == 0)
 		{
 			printf("exit\n");
-			printf("bash: exit: %s: numeric argument required\n", cmd->first_arg->next->val.str);
+			printf("bash: exit: %s: ", cmd->first_arg->next->val.str);
+			printf("numeric argument required\n");
 			exit(2);
 		}
 	}

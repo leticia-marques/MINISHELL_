@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:21:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 18:02:15 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:03:31 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	free_node(t_node *node)
 {
-	t_node *aux;
-    t_node *tmp;
+	t_node	*aux;
+	t_node	*tmp;
 
-    if (!node)
-        return;
-    aux = node->first_arg;
-    while (aux)
-    {
-        tmp = aux->next;
-        free_node(aux);
-        aux = tmp;
-    }
-   	if (node->val.str)
-      free(node->val.str);
-    free(node);
+	if (!node)
+		return ;
+	aux = node->first_arg;
+	while (aux)
+	{
+		tmp = aux->next;
+		free_node(aux);
+		aux = tmp;
+	}
+	if (node->val.str)
+		free(node->val.str);
+	free(node);
 }
 
 void	free_token(t_token *token)

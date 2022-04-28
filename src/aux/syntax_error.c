@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 19:55:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 00:07:23 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:11:16 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
+
+static int	check_syntax_loop(t_node *aux, char *tmp)
+{
+	while (aux)
+	{
+		str = aux->val.str;
+		if (aux->next != NULL)
+			tmp = aux->next->val.str;
+		if (ft_strcmp(str, ">") == 0 || ft_strcmp(str, ">>") == 0 || \
+			ft_strcmp(str, "<") == 0 || \
+			ft_strcmp(str, "<<") == 0 || str[0] == '\0')
+		{
+			if ((ft_strcmp(tmp, ">") == 0 || ft_strcmp(tmp, ">>") == 0 \
+				|| ft_strcmp(tmp, "<") == 0 || ft_strcmp(tmp, "<<") == 0) \
+				|| tmp[0] == '\0')
+			{
+				redirect_error(tmp);
+				return (0);
+			}
+		}
+		aux = aux->next;
+		tmp = "";
+	}
+}
 
 int	check_syntax_error(t_node **cmd)
 {
@@ -22,22 +46,6 @@ int	check_syntax_error(t_node **cmd)
 	if (ft_strcmp(aux->val.str, "echo") == 0)
 		return (1);
 	tmp = "";
-	while (aux)
-	{
-		str = aux->val.str;
-		if (aux->next != NULL)
-			tmp = aux->next->val.str;
-		if (ft_strcmp(str, ">") == 0 || ft_strcmp(str, ">>") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, "<<") == 0 || str[0] == '\0')
-		{
-			if ((ft_strcmp(tmp, ">") == 0 || ft_strcmp(tmp, ">>") == 0 \
-			|| ft_strcmp(tmp, "<") == 0 || ft_strcmp(tmp, "<<") == 0) || tmp[0] == '\0')
-			{
-				redirect_error(tmp);
-				return (0);
-			}
-		}
-		aux = aux->next;
-		tmp= "";
-	}
+	check_syntax_loop(aux, tmp);
 	return (1);
 }

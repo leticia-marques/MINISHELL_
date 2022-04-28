@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 02:13:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/26 20:02:40 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:06:08 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_src(t_input *source, char *line)
 	source->position = -2;
 }
 
-void	get_prompt()
+void	get_prompt(void)
 {
 	char	*aux;
 
@@ -62,7 +62,6 @@ void	get_prompt()
 	aux = vars->prompt;
 	vars->prompt = ft_strjoin(aux, "$ ");
 	free(aux);
-
 }
 
 void	init_vars(char **envp)

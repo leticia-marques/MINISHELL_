@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_value_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 01:36:05 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 19:57:03 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:29:11 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	set_value_str(t_node *node, char *val)
 		{
 			ft_strlcpy(val_cpy, val, ft_strlen(val) + 1);
 			node->val.str = val_cpy;
-
 		}
 	}
 }

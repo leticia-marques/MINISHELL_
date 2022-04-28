@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 18:43:44 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:23:44 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ void	var_expansion(t_node **cmd)
 	}
 }*/
 void	check_char(t_format *data, char *old, int len);
-static char *find_var(char *var)
+
+static char	*find_var(char *var)
 {
-	char *line;
+	char	*line;
 	int		i;
 
 	i = -1;
@@ -107,8 +108,8 @@ static char *find_var(char *var)
 			{
 				if (vars->env[i][ft_strlen(var)] == '=')
 				{
-					line = vars->env[i]+ft_strlen(var)+1;
-					break;
+					line = vars->env[i] + ft_strlen(var) + 1;
+					break ;
 				}
 			}
 		}
@@ -120,15 +121,19 @@ static char *find_var(char *var)
 
 void	check_unset_export(t_format **data, char *old, int len)
 {
-	int i;
+	int	i;
+
 	i = (*data)->old_needle;
-	if (ft_strncmp(old+i, "export", 6) == 0 || \
-		ft_strncmp(old+i, "unset", 5) == 0 )
+	if (ft_strncmp(old + i, "export", 6) == 0 || \
+		ft_strncmp(old + i, "unset", 5) == 0)
 	{
-		while (old[(*data)->old_needle] != '|' && old[(*data)->old_needle] != '\0' )
+		while (old[(*data)->old_needle] != '|' && \
+			old[(*data)->old_needle] != '\0')
 		{
-			get_space(&(*data)->new, (*data)->new_needle, (*data)->old_needle, len);
-			copy_and_walk(&(*data)->new, &old, &(*data)->new_needle, &(*data)->old_needle);
+			get_space(&(*data)->new, (*data)->new_needle, \
+				(*data)->old_needle, len);
+			copy_and_walk(&(*data)->new, &old, \
+				&(*data)->new_needle, &(*data)->old_needle);
 		}
 		return ;
 	}
@@ -148,16 +153,16 @@ void	expand_var(t_format *data, char *old, int len, char symbol)
 	var_len = 0;
 	while (old[data->old_needle] != symbol && old[data->old_needle] != '\0' && \
 		old[data->old_needle] != '\'' && old[data->old_needle] != '\"')
-		{
-			copy_and_walk(&var, &old, &var_len, &data->old_needle);
-			if (ft_isalpha(old[data->old_needle]) == 0
+	{
+		copy_and_walk(&var, &old, &var_len, &data->old_needle);
+		if (ft_isalpha(old[data->old_needle]) == 0 \
 			&& old[data->old_needle] != '$')
-				break;
-		}
+			break ;
+	}
 	var[var_len] = '\0';
 	if (symbol == '\"')
 		data->old_needle++;
-	expanded = find_var(var+1);
+	expanded = find_var(var + 1);
 	free(var);
 	temp = ft_strjoin(data->new, expanded);
 	free(data->new);
@@ -172,33 +177,24 @@ void	check_char(t_format *data, char *old, int len)
 	if (old[data->old_needle] == '\'' && old[data->old_needle + 1] != '\'')
 		clear_quotes(data, old, len, '\'');
 	else if (old[data->old_needle] == '\"' && old[data->old_needle + 1] != '$')
-	{
-		/*data->old_needle++;
-		while (old[data->old_needle] && old[data->old_needle] != '\"')
-		{
-			if (old[data->old_needle] == '$')
-				expand_var(data, old, len, ' ');
-			get_space(&data->new, data->new_needle, data->old_needle, len);
-			copy_and_walk(&data->new, &old, &data->new_needle, \
-			&data->old_needle);
-		}
-		data->old_needle++;*/
 		clear_quotes(data, old, len, '\"');
-	}
-	else if (old[data->old_needle] == '\"' && old[data->old_needle + 1]	== '$'
-		&& old[data->old_needle + 2] != '\"' && old[data->old_needle + 2] != ' ')
+	else if (old[data->old_needle] == '\"' && old[data->old_needle + 1] == '$' \
+		&& old[data->old_needle + 2] != '\"' && \
+		old[data->old_needle + 2] != ' ')
 	{
-			if (old[data->old_needle + 2] != '?' )
-				expand_var(data, old, len, '\"');
+		if (old[data->old_needle + 2] != '?' )
+			expand_var(data, old, len, '\"');
 	}
-	else if (old[data->old_needle] == '$' && old[data->old_needle + 1] != '?' && old[data->old_needle + 1] != '\0')
+	else if (old[data->old_needle] == '$' && old[data->old_needle + 1] \
+		!= '?' && old[data->old_needle + 1] != '\0')
 	{
 		if (old[data->old_needle + 1] != '\"')
 			expand_var(data, old, len, ' ');
 		else
 		{
 			get_space(&data->new, data->new_needle, data->old_needle, len);
-			copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
+			copy_and_walk(&data->new, &old, \
+				&data->new_needle, &data->old_needle);
 		}
 	}
 	else
@@ -226,9 +222,9 @@ char	*format_line(char *old, int len)
 		if (old[data->old_needle] == ' ' && old[data->old_needle + 1] == ' ')
 			data->old_needle++;
 		if ((old[data->old_needle] == 'e' && old[data->old_needle + 1] == 'x')
-			 ||
-			 (old[data->old_needle] == 'u' && old[data->old_needle + 1] == 'n'))
-				check_unset_export(&data, old, len);
+			|| (old[data->old_needle] == 'u' \
+			&& old[data->old_needle + 1] == 'n'))
+			check_unset_export(&data, old, len);
 		else
 			check_char(data, old, len);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:26:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/20 20:26:12 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:37:56 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	cd(t_node *cmd)
 	char	*old_cwd;
 
 	vars->exit_code = 0;
-	old_cwd = malloc(sizeof(char ) *   ft_strlen(vars->old_dir)+1);
-	ft_strlcpy(old_cwd, vars->old_dir, ft_strlen(vars->old_dir)+1);
+	old_cwd = malloc(sizeof(char ) * ft_strlen(vars->old_dir) + 1);
+	ft_strlcpy(old_cwd, vars->old_dir, ft_strlen(vars->old_dir) + 1);
 	if (cmd->args == 1)
 		path = getenv("HOME");
 	else

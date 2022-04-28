@@ -6,13 +6,13 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 02:17:13 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 05:37:16 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_vars	*vars;
+g_vars	*g_vars;
 
 static void	parse_and_call_exec_aux(int i, t_input	*source, t_node	*cmd)
 {
@@ -67,7 +67,6 @@ static void	read_prompt(t_token_holder *holder)
 			if (!(ft_strcmp(vars->line, "") == 0))
 				parse_and_call_exec(vars->line, holder);
 			free(vars->line);
-			vars->count = 1;
 		}
 		else if (vars->line == NULL)
 		{

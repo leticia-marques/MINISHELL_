@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakeshi <rtakeshi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:13:02 by rtakeshi          #+#    #+#             */
-/*   Updated: 2022/04/12 01:23:21 by rtakeshi         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:13:49 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,8 @@ void	get_space(char **new, int new_needle, int old_needle, int len)
 
 void	clear_quotes(t_format *data, char *old, int len, char quote)
 {
-	/*data->old_needle++;
-	get_space(&data->new, data->new_needle, data->old_needle, len);
-	while (old[data->old_needle] != quote && old[data->old_needle] != '\0')
-		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
-	if (old[data->old_needle] == quote)
-		data->old_needle++;*/
-
-
 	if (quote == '\"')
 	{
-		//data->old_needle++;
 		get_space(&data->new, data->new_needle, data->old_needle, len);
 		copy_and_walk(&data->new, &old, &data->new_needle, \
 			&data->old_needle);
@@ -62,14 +53,14 @@ void	clear_quotes(t_format *data, char *old, int len, char quote)
 		}
 		get_space(&data->new, data->new_needle, data->old_needle, len);
 		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
-		//data->old_needle++;
-	}
+	}	
 	else if (quote == '\'')
 	{
 		get_space(&data->new, data->new_needle, data->old_needle, len);
 		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
 		while (old[data->old_needle] != '\'' && old[data->old_needle] != '\0')
-			copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
+			copy_and_walk(&data->new, &old, \
+				&data->new_needle, &data->old_needle);
 		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
 	}
 }

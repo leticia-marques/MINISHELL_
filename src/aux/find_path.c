@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:10 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/25 16:57:26 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:54:48 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,9 @@ static void	*add_slash(char *str)
 
 static char	**extract_paths(void)
 {
-	// char	*env_var;
-	// char	**splitted_path;
-	// int		i;
-
-	// i = 0;
-	// env_var = getenv("PATH");
-	// splitted_path = ft_split(env_var, ':');
-	// if (!splitted_path)
-	// 	return (NULL);
-	// while (splitted_path[i] != NULL)
-	// {
-	// 	splitted_path[i] = add_slash(splitted_path[i]);
-	// 	i++;
-	// }
-	// return (splitted_path);
-	// char	*env_var;
 	char	**splitted_path;
-	// int		i;
-
-	// i = 0;
-	// env_var = getenv("PATH");
-
-
 	char	*path;
 	int		i;
-
 
 	i = -1;
 	while (vars->env[++i])
@@ -74,40 +51,40 @@ static char	**extract_paths(void)
 	return (NULL);
 }
 
+static char	*check_absolute_path(char *cmd)
+{
+	if (!cmd)
+		return (cmd);
+	else if (ft_strchr(cmd, '/') && access(cmd, F_OK | X_OK) == 0)
+	{
+		cmd_path = ft_strdup(cmd);
+		return (cmd_path);
+	}
+	return (NULL);
+}
+
 char	*find_path(char *cmd)
 {
 	char	*cmd_path;
 	char	**splited_path;
 	int		i;
 
-	i = 0;
+	check_absolute_path(cmd);
+	i = -1;
 	splited_path = extract_paths();
-	if (!cmd)
-		return (cmd);
-	else if (ft_strchr(cmd, '/') && access(cmd, F_OK | X_OK) == 0)
-	{
-		cmd_path = ft_strdup(cmd);
-		ft_split_free(splited_path);
-
-		return (cmd_path);
-	}
 	if (splited_path)
 	{
-		while (splited_path[i] != NULL)
+		while (splited_path[++i] != NULL)
 		{
 			cmd_path = ft_strjoin(splited_path[i], cmd);
 			if (!cmd_path)
-			{
-				i++;
 				continue ;
-			}
 			if (access(cmd_path, F_OK | X_OK) == 0)
 			{
 				ft_split_free(splited_path);
 				return (cmd_path);
 			}
 			free(cmd_path);
-			i++;
 		}
 	}
 	command_not_found(cmd, splited_path);

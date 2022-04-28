@@ -20,6 +20,7 @@ void	redirect_error(char *symbol)
 		printf("bash: syntax error near unexpected token `%s`\n", symbol);
 	vars->exit_code = 2;
 }
+
 void	error(int code, char *cmd_path, char **command)
 {
 	if (code == 1)

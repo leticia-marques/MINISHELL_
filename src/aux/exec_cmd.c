@@ -6,13 +6,13 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:52:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 02:16:15 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 04:37:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void signal_to_cat(int sig)
+void	signal_to_cat(int sig)
 {
 	(void)sig;
 	write(1, "\n", 1);
@@ -48,7 +48,6 @@ static void	parent_process(t_node *cmd, char **command, int fd[2])
 
 void	exec_cmd(t_node *cmd, char **command, char **envp, int *fd)
 {
-
 	cmd->cmd_path = find_path(command[0]);
 	if (!cmd->cmd_path)
 	{
@@ -64,38 +63,4 @@ void	exec_cmd(t_node *cmd, char **command, char **envp, int *fd)
 		child_process(cmd, command, envp, fd);
 	else
 		parent_process(cmd, command, fd);
-}
-
-void	exec_last_cmd(t_node *cmd, char **envp)
-{
-	char	*cmd_path;
-	char	**command;
-
-	signal(SIGINT, signal_to_cat);
-	command = extract_cmd(cmd);
-	if (!command)
-		return ;
-	cmd_path = find_path(command[0]);
-	if (!cmd_path)
-	{
-		free_cmd(command);
-		return ;
-	}
-	vars->pid = fork();
-	if (vars->pid == -1)
-		error(1, cmd_path, command);
-	if (vars->pid == 0)
-	{
-		if (execve(cmd_path, command, envp) == -1)
-			error(1, cmd_path, command);
-	}
-	else
-		waitpid(vars->pid, &vars->w_status, 0);
-	if (!WIFSIGNALED(vars->w_status))
-		vars->exit_code = WEXITSTATUS(vars->w_status);
-	else
-		vars->exit_code = vars->w_status + 128;
-	ft_split_free(command);
-	free(cmd_path);
-	// free_node(cmd);
 }

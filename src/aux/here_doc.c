@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 17:25:39 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:05:39 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void	child_process(int fd[2], char *delimiter)
 		{
 			write(fd[1], line, ft_strlen(line));
 			write(fd[1], "\n", 1);
-			free(line);
 		}
 		else
 		{
@@ -49,10 +48,11 @@ static void	child_process(int fd[2], char *delimiter)
 		free(line);
 	vars->exit_code = 1;
 }
+
 int	here_doc(char *delimiter)
 {
-	int		fd[2];
-	int i;
+	int	fd[2];
+	int	i;
 
 	signal(SIGINT, SIG_IGN);
 	if (pipe(fd) == 1)
@@ -61,8 +61,6 @@ int	here_doc(char *delimiter)
 		return (errno);
 	}
 	i = fork();
-	// dup2(vars->save_stdin, 0);
-	// dup2(vars->save_stdout, 1);
 	if (i == 0)
 	{
 		child_process(fd, delimiter);

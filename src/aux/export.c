@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 00:08:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/16 18:23:04 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:56:31 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	export(t_node **cmd)
 	}
 }
 
-void	export_env()
+void	export_env(void)
 {
 	int		i;
 	char	**new_env;

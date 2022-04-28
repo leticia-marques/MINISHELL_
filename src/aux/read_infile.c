@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_infile.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:02:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/22 17:02:51 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 05:07:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-static void handling_signal(int sig)
+static void	handling_signal(int sig)
 {
 	vars->exit_code = 130;
 	(void)sig;
@@ -23,7 +23,7 @@ static void handling_signal(int sig)
 void	read_infile(void)
 {
 	char	*line;
-	int i;
+	int		i;
 
 	i = fork();
 	if (i == 0)
@@ -32,9 +32,9 @@ void	read_infile(void)
 		while (1)
 		{
 			line = readline("");
-			if(ft_strcmp(line, "") == 0)
+			if (ft_strcmp(line, "") == 0)
 				printf("\n");
-			break;
+			break ;
 		}
 		vars->exit_code = 0;
 		exit(0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:31:03 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/19 23:37:16 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:40:10 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,4 @@ void	unset(t_node **cmd)
 		check_variable_exists(aux->val.str);
 		aux = aux->next;
 	}
-
 }

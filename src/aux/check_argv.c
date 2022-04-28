@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 18:16:18 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 04:59:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static int	check_exit_expansion(t_node **cmd)
 		{
 			free(aux->val.str);
 			aux->val.str = malloc(sizeof(char) * exit_code_size +1);
-			ft_strlcpy(aux->val.str, ft_itoa(vars->exit_code),exit_code_size +1);
+			ft_strlcpy(aux->val.str, \
+				ft_itoa(vars->exit_code), exit_code_size + 1);
 		}
 		aux = aux->next;
 	}
@@ -66,7 +67,7 @@ static void	init_cmd_fd(t_node **cmd)
 
 int	check_argv(t_node **cmd, t_input *src)
 {
-	int	i;
+	int		i;
 	char	*str;
 
 	str = (*cmd)->first_arg->val.str;
