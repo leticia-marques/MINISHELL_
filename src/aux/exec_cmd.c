@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:52:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 18:15:18 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 02:16:15 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,5 @@ void	exec_last_cmd(t_node *cmd, char **envp)
 		vars->exit_code = vars->w_status + 128;
 	ft_split_free(command);
 	free(cmd_path);
-	if (cmd)
-		free_node(cmd);
+	// free_node(cmd);
 }
