@@ -6,32 +6,12 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 22:34:23 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 23:36:53 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-static int	check_exit_expansion(t_node **cmd)
-{
-	t_node	*aux;
-	int		exit_code_size;
-
-	exit_code_size = ft_strlen(ft_itoa(vars->exit_code));
-	aux = (*cmd)->first_arg;
-	while (aux)
-	{
-		if (ft_strcmp(aux->val.str, "$?") == 0)
-		{
-			free(aux->val.str);
-			aux->val.str = malloc(sizeof(char) * exit_code_size +1);
-			ft_strlcpy(aux->val.str, \
-				ft_itoa(vars->exit_code), exit_code_size + 1);
-		}
-		aux = aux->next;
-	}
-	return (1);
-}
 
 static int	check_builtin(t_node **cmd, t_input *src)
 {
@@ -65,6 +45,20 @@ static void	init_cmd_fd(t_node **cmd)
 	(*cmd)->outfile = -1;
 }
 
+static int	has_redirection(t_node **cmd)
+{
+	t_node	*aux;
+
+	aux = (*cmd)->first_arg;
+
+	while(aux)
+	{
+		if (ft_strchr(aux->val.str, '<') || ft_strchr(aux->val.str, '>'))
+			return (0);
+		aux = aux->next;
+	}
+	return (1);
+}
 int	check_argv(t_node **cmd, t_input *src)
 {
 	int		i;
@@ -79,7 +73,7 @@ int	check_argv(t_node **cmd, t_input *src)
 		i = here_doc_call(cmd);
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
-	else if (ft_strchr(str, '<') != NULL || ft_strchr(str, '>') != NULL)
+	else if (has_redirection(cmd) == 0)
 		i = check_outfile(cmd);
 	else
 	{

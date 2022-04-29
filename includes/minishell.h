@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:23:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 22:40:13 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 23:37:36 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ void	unset(t_node **cmd);
 int		cd(t_node *cmd);
 int		exit_builtin(t_node *cmd);
 int		check_echo(t_node **cmd);
+int		check_exit_expansion(t_node **cmd);
 
 void	get_prompt();
 #endif
