@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:05:39 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 18:46:10 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,26 @@ static void	child_process(int fd[2], char *delimiter)
 	vars->exit_code = 1;
 }
 
-int	here_doc(char *delimiter)
+void	free_nodess(t_node **node)
+{
+	t_node	*aux;
+	t_node	*tmp;
+
+	if (!(*node))
+		return ;
+	aux = (*node)->first_arg;
+	while (aux)
+	{
+		tmp = aux->next;
+		free_node(aux);
+		aux = tmp;
+	}
+	if ((*node)->val.str)
+		free((*node)->val.str);
+	free((*node));
+}
+
+int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 {
 	int	fd[2];
 	int	i;
@@ -67,6 +86,9 @@ int	here_doc(char *delimiter)
 		close(fd[1]);
 		dup2(fd[0], STDOUT_FILENO);
 		close(fd[0]);
+		free_vars_and_holder(holder);
+		free_nodess(cmd);
+		free(s->line);
 		exit(1);
 	}
 	else

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   call_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:18:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/27 16:50:25 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 18:45:19 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-int	here_doc_call(t_node **cmd)
+int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 {
 	if (check_syntax_error(cmd) != 0)
 	{
-		here_doc((*cmd)->first_arg->next->val.str);
+		here_doc((*cmd)->first_arg->next->val.str, holder, cmd, src);
 		check_outfile(cmd);
 		if ((*cmd)->args > 2)
 		{

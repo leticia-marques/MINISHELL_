@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 23:36:53 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 18:44:52 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	has_redirection(t_node **cmd)
 	}
 	return (1);
 }
-int	check_argv(t_node **cmd, t_input *src)
+int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 {
 	int		i;
 	char	*str;
@@ -70,7 +70,7 @@ int	check_argv(t_node **cmd, t_input *src)
 	if (!(*cmd)->first_arg)
 		return (0);
 	else if (ft_strncmp(str, "<<", 2) == 0)
-		i = here_doc_call(cmd);
+		i = here_doc_call(cmd, holder, src);
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
 	else if (has_redirection(cmd) == 0)
