@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 01:00:23 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/11 06:48:00 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 22:42:22 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	order_env(char **new_env)
 	}
 }
 
-void	write_to_pipe(char **new_env)
+void	write_to_pipe(char **new_env, t_input *src)
 {
 	int	i;
 	int	fd[2];
+	int	position;
 
+	position = src->position >= src->line_size;
 	if (pipe(fd) == -1)
 		perror("error:");
 	i = -1;
@@ -47,11 +49,13 @@ void	write_to_pipe(char **new_env)
 		new_env[i] = ft_strjoin("Declare -x ", new_env[i]);
 		if (!new_env)
 			return ;
-		printf("%s\n", new_env[i]);
-		write(fd[1], new_env[i], ft_strlen(new_env[i]));
-		write(fd[1], "\n", ft_strlen(new_env[i]));
+		if (position)
+			ft_putendl_fd(new_env[i], 1);
+		else
+			ft_putendl_fd(new_env[i], fd[1]);
 	}
-	dup2(fd[0], STDIN_FILENO);
+	if (!position)
+		dup2(fd[0], STDIN_FILENO);
 	close(fd[0]);
 	close(fd[1]);
 }

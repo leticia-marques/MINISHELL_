@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:23:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 14:52:07 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:40:13 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,9 +204,9 @@ void	read_infile(void);
 //builtins
 void	export(t_node **cmd);
 void	check_variable_exists(char *var);
-void	export_env();
+void	export_env(t_input *src);
 void	order_env(char **new_env);
-void	write_to_pipe(char **new_env);
+void	write_to_pipe(char **new_env, t_input *src);
 void	unset(t_node **cmd);
 int		cd(t_node *cmd);
 int		exit_builtin(t_node *cmd);

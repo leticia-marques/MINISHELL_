@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:23:44 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 19:05:28 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,12 @@ void	check_char(t_format *data, char *old, int len)
 	{
 		if (old[data->old_needle + 2] != '?' )
 			expand_var(data, old, len, '\"');
+		else
+		{
+			get_space(&data->new, data->new_needle, data->old_needle, len);
+			copy_and_walk(&data->new, &old, \
+				&data->new_needle, &data->old_needle);
+		}
 	}
 	else if (old[data->old_needle] == '$' && old[data->old_needle + 1] \
 		!= '?' && old[data->old_needle + 1] != '\0')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:59:27 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 22:34:23 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	check_builtin(t_node **cmd, t_input *src)
 		if (src->position >= src->line_size && (*cmd)->first_arg->next != NULL)
 			export(cmd);
 		else
-			export_env();
+			export_env(src);
 		return (0);
 	}
 	else if (ft_strcmp((*cmd)->first_arg->val.str, "unset") == 0)
@@ -79,7 +79,7 @@ int	check_argv(t_node **cmd, t_input *src)
 		i = here_doc_call(cmd);
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
-	else if (ft_strchr(str, '<') == 0 || ft_strchr(str, '>') == 0)
+	else if (ft_strchr(str, '<') != NULL || ft_strchr(str, '>') != NULL)
 		i = check_outfile(cmd);
 	else
 	{

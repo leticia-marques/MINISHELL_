@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 00:08:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:56:31 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/28 22:35:51 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static void	get_var_name(char *var_name)
 	if (ft_strchr(var_name, '='))
 	{
 		while (var_name[i] != '\0' && var_name[i] != '=')
-		i++;
+			i++;
 		var = ft_substr(var_name, 0, i);
 		if (!var)
 			return ;
-		if (ft_isdigit(var_name[0]) == 0)
+		if (ft_isdigit(var_name[0]) == 0 && var_name[0] != '$')
 		{
 			check_variable_exists(var);
 			export_var(var_name);
@@ -67,7 +67,7 @@ void	export(t_node **cmd)
 	}
 }
 
-void	export_env(void)
+void	export_env(t_input *src)
 {
 	int		i;
 	char	**new_env;
@@ -81,7 +81,7 @@ void	export_env(void)
 			new_env[i] = vars->env[i];
 	new_env[i] = NULL;
 	order_env(new_env);
-	write_to_pipe(new_env);
+	write_to_pipe(new_env, src);
 	i = -1;
 	while (new_env[++i] != NULL)
 		free(new_env[i]);
