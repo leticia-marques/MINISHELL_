@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:05:39 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 16:30:27 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	here_doc_sig(int sig)
 	exit (130);
 }
 
-static void	child_process(int fd[2], char *delimiter)
+static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 {
 	char	*line;
 
@@ -31,8 +31,13 @@ static void	child_process(int fd[2], char *delimiter)
 		line = readline("> ");
 		if (line != NULL && (ft_strcmp(line, delimiter) != 0))
 		{
-			write(fd[1], line, ft_strlen(line));
-			write(fd[1], "\n", 1);
+			if ((*cmd)->outfile == -1)
+			{
+				write(fd[1], line, ft_strlen(line));
+				write(fd[1], "\n", 1);
+			}
+			else
+				ft_putstr_fd(line, (*cmd)->outfile);
 		}
 		else
 		{
@@ -49,7 +54,7 @@ static void	child_process(int fd[2], char *delimiter)
 	vars->exit_code = 1;
 }
 
-int	here_doc(char *delimiter)
+int	here_doc(char *delimiter, t_node **cmd)
 {
 	int	fd[2];
 	int	i;
@@ -63,7 +68,7 @@ int	here_doc(char *delimiter)
 	i = fork();
 	if (i == 0)
 	{
-		child_process(fd, delimiter);
+		child_process(fd, delimiter, cmd);
 		close(fd[1]);
 		dup2(fd[0], STDOUT_FILENO);
 		close(fd[0]);
@@ -71,7 +76,8 @@ int	here_doc(char *delimiter)
 	}
 	else
 		wait(NULL);
-	dup2(fd[0], STDIN_FILENO);
+	if ((*cmd)->outfile == -1)
+		dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	close(fd[0]);
 	return (0);

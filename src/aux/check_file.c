@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:38:42 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 15:48:50 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,12 @@ static void	has_outfile(t_node **cmd)
 	}
 }
 
-int	check_outfile(t_node **cmd)
+int	check_outfile(t_node **cmd, int i)
 {
 	if (check_syntax_error(cmd) != 0)
 	{
 		has_outfile(cmd);
-		if ((*cmd)->outfile != -1)
+		if ((*cmd)->outfile != -1 && i != 0)
 		{
 			dup2((*cmd)->outfile, STDOUT_FILENO);
 			close((*cmd)->outfile);

@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 23:36:53 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:30:55 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	check_argv(t_node **cmd, t_input *src)
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
 	else if (has_redirection(cmd) == 0)
-		i = check_outfile(cmd);
+		i = check_outfile(cmd, 1);
 	else
 	{
 		check_exit_expansion(cmd);
