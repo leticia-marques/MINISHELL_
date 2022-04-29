@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 02:13:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:06:08 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 00:48:35 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	get_prompt(void)
 	aux = ft_strjoin(vars->prompt, ":");
 	free(vars->prompt);
 	vars->prompt = ft_strjoin(aux, BLUE);
+	free(aux);
 	aux = vars->prompt;
 	vars->prompt = ft_strjoin(aux, vars->path);
 	free(aux);
