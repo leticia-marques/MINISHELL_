@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 23:37:26 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	check_exit_expansion(t_node **cmd)
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
-		if (ft_strcmp(aux->val.str, "$?") == 0)
+		if (ft_strcmp(aux->val, "$?") == 0)
 		{
-			free(aux->val.str);
-			aux->val.str = malloc(sizeof(char) * exit_code_size +1);
-			ft_strlcpy(aux->val.str, \
+			free(aux->val);
+			aux->val = malloc(sizeof(char) * exit_code_size +1);
+			ft_strlcpy(aux->val, \
 				ft_itoa(vars->exit_code), exit_code_size + 1);
 		}
 		aux = aux->next;
@@ -45,18 +45,18 @@ int	exit_builtin(t_node *cmd)
 		printf("bash: exit: too many arguments");
 		return (0);
 	}
-	while (cmd->first_arg->next->val.str[++i])
+	while (cmd->first_arg->next->val[++i])
 	{
-		if (ft_isdigit(cmd->first_arg->next->val.str[i]) == 0)
+		if (ft_isdigit(cmd->first_arg->next->val[i]) == 0)
 		{
 			printf("exit\n");
-			printf("bash: exit: %s: ", cmd->first_arg->next->val.str);
+			printf("bash: exit: %s: ", cmd->first_arg->next->val);
 			printf("numeric argument required\n");
 			exit(2);
 		}
 	}
-	vars->exit_code = ft_atoi(cmd->first_arg->next->val.str);
-	free_node(cmd);
+	vars->exit_code = ft_atoi(cmd->first_arg->next->val);
+	free_node(&cmd);
 	printf("exit\n");
 	exit(vars->exit_code);
 }

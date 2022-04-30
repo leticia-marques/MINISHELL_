@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 19:26:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:37:56 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	cd(t_node *cmd)
 	if (cmd->args == 1)
 		path = getenv("HOME");
 	else
-		path = cmd->first_arg->next->val.str;
+		path = cmd->first_arg->next->val;
 	if (ft_strcmp(path, "~") == 0)
 		path = getenv("HOME");
 	if (ft_strcmp(path, "-") == 0)

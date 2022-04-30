@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 15:48:50 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static void	first_outfile(t_node **cmd, t_node	**aux)
 
 	if ((*aux)->next->next)
 	{
-		if (!ft_strcmp((*aux)->next->val.str, ">"))
-			(*cmd)->outfile = open((*aux)->next->next->val.str, O_WRONLY \
+		if (!ft_strcmp((*aux)->next->val, ">"))
+			(*cmd)->outfile = open((*aux)->next->next->val, O_WRONLY \
 			| O_CREAT | O_TRUNC, 0777);
 		else
-			(*cmd)->outfile = open((*aux)->next->next->val.str, O_WRONLY \
+			(*cmd)->outfile = open((*aux)->next->next->val, O_WRONLY \
 			| O_CREAT | O_APPEND, 0777);
 		if ((*cmd)->outfile == -1)
 			error_infile(cmd, 2);
 		redirect = (*aux)->next;
 		file = (*aux)->next->next;
 		(*aux)->next = (*aux)->next->next->next;
-		free_node(redirect);
-		free_node(file);
+		free_node(&redirect);
+		free_node(&file);
 	}
 }
 
@@ -44,19 +44,19 @@ static void	multiple_outfiles(t_node **cmd, t_node	**aux)
 	{
 		if ((*cmd)->outfile != -1)
 			close((*cmd)->outfile);
-		if (!ft_strcmp((*aux)->val.str, ">"))
-			(*cmd)->outfile = open((*aux)->next->val.str, O_WRONLY \
+		if (!ft_strcmp((*aux)->val, ">"))
+			(*cmd)->outfile = open((*aux)->next->val, O_WRONLY \
 			| O_CREAT | O_TRUNC, 0777);
 		else
-			(*cmd)->outfile = open((*aux)->next->val.str, O_WRONLY \
+			(*cmd)->outfile = open((*aux)->next->val, O_WRONLY \
 			| O_CREAT | O_APPEND, 0777);
 		if ((*cmd)->outfile == -1)
 			error_infile(cmd, 2);
 		redirect = (*aux);
 		file = (*aux)->next;
 		*aux = (*aux)->next->next;
-		free_node(redirect);
-		free_node(file);
+		free_node(&redirect);
+		free_node(&file);
 	}
 }
 
@@ -69,16 +69,16 @@ static void	has_outfile(t_node **cmd)
 	{
 		if (!aux->next)
 			break ;
-		else if (!ft_strcmp(aux->next->val.str, ">") || \
-				!ft_strcmp(aux->next->val.str, ">>"))
+		else if (!ft_strcmp(aux->next->val, ">") || \
+				!ft_strcmp(aux->next->val, ">>"))
 			first_outfile(cmd, &aux);
-		else if (!ft_strcmp(aux->val.str, ">") || \
-				!ft_strcmp(aux->val.str, ">>"))
+		else if (!ft_strcmp(aux->val, ">") || \
+				!ft_strcmp(aux->val, ">>"))
 			multiple_outfiles(cmd, &aux);
 		if (!aux)
 			break ;
-		else if (!ft_strcmp(aux->val.str, ">") || \
-		!ft_strcmp(aux->val.str, ">>"))
+		else if (!ft_strcmp(aux->val, ">") || \
+		!ft_strcmp(aux->val, ">>"))
 			continue ;
 		aux = aux->next;
 	}

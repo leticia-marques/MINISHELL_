@@ -3,32 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:21:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 05:03:31 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	free_node(t_node *node)
+// void	free_node(t_node **node)
+// {
+// 	t_node	*aux;
+// 	t_node	*tmp;
+
+// 	if (!node)
+// 		return ;
+// 	aux = (*node)->first_arg;
+// 	while (aux)
+// 	{
+// 		tmp = aux->next;
+// 		free_node(aux);
+// 		aux = tmp;
+// 	}
+// 	if (node->val)
+// 		free(node->val);
+// 	free(node);
+// }
+
+
+void	free_node(t_node **node)
 {
 	t_node	*aux;
 	t_node	*tmp;
 
-	if (!node)
+	if (!(*node))
 		return ;
-	aux = node->first_arg;
+	aux = (*node)->first_arg;
 	while (aux)
 	{
 		tmp = aux->next;
-		free_node(aux);
+		free_node(&aux);
 		aux = tmp;
 	}
-	if (node->val.str)
-		free(node->val.str);
-	free(node);
+	if ((*node)->val)
+		free((*node)->val);
+	free((*node));
 }
 
 void	free_token(t_token *token)

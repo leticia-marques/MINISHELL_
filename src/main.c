@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 22:27:06 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:21:38 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,15 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 	cmd = parser_command(&source, holder);
 	if (cmd == NULL)
 		return ;
-	i = check_argv(&cmd, &source);
+	i = check_argv(&cmd, &source, holder);
 	if (source.position >= source.line_size)
 	{
 		signal(SIGQUIT, signal_aborted);
 		if (i == 1)
 			exec_last_cmd(cmd, vars->env);
 		free(source.line);
+		// if (cmd)
+		// 	free_node(&cmd);
 		return ;
 	}
 	else

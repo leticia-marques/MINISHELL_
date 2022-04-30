@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:23:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 15:49:41 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:27:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,46 +65,14 @@ typedef struct  s_token_holder
     char    *token_buf;
     int     buf_size;
     int     buf_position;
-	int		inside_quote;
 }               t_token_holder;
 ///////////////////////////////////////
 
 //node structs
-typedef enum    e_command_type
-{
-    command,
-    name,
-}               t_command_type;
-
-typedef enum	e_val_type
-{
-	VAL_SINT = 1,
-	VAL_UINT,
-	VAL_SLLONG,
-	VAL_ULLONG,
-	VAL_FLOAT,
-	VAR_LDOUBLE,
-	VAL_CHR,
-	VAL_STR,
-}				t_val_type;
-
-typedef union	u_symval_type
-{
-	long				sint;
-	unsigned long		uint;
-	long long			sllong;
-	unsigned long long	ullong;
-	double				sfloat;
-	long double			ldouble;
-	char				chr;
-	char				*str;
-}				t_symval_type;
 
 typedef struct	s_node
 {
-	t_command_type		type;
-	t_val_type			val_type;
-	t_symval_type		val;
+	char				*val;
 	int					args;
 	struct s_node		*first_arg;
 	struct s_node		*next;
@@ -139,7 +107,7 @@ typedef struct s_parser
 }			t_parser;
 
 //node functions
-t_node  *new_node(t_command_type type);
+t_node  *new_node();
 void    add_argument_node(t_node *cmd, t_node *arg);
 
 //parser
@@ -168,10 +136,10 @@ void    init_holder(t_token_holder *holder);
 void    init_src(t_input *source, char *line);
 
 //parse and exec
-int		check_argv(t_node **cmd, t_input *src);
-int		here_doc(char *delimiter, t_node **cmd);
+int		check_argv(t_node **cmd, t_input *src, t_token_holder *holder);
+int		here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s);
 int		check_outfile(t_node **cmd, int i);//opens fds
-int		here_doc_call(t_node **cmd);
+int		here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src);
 int		infile_outfile_call(t_node **cmd);
 void	filter_cmd(t_node **cmd);
 //void	var_expansion(t_node **cmd);
@@ -190,7 +158,7 @@ int	check_syntax_error(t_node **cmd);
 
 //free
 void    free_token(t_token *token);
-void free_node(t_node *node);
+void free_node(t_node **node);
 void free_cmd(char **command);
 void	free_vars_and_holder(t_token_holder *holder);
 

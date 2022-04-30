@@ -35,7 +35,7 @@ void	error_infile(t_node **cmd, int code)
 {
 	if (code == 2)
 	{
-		free_node(*cmd);
+		free_node(cmd);
 		perror("error:");
 	}
 }

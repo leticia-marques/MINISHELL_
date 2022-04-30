@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:24:34 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 20:03:02 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	filter_cmd(t_node **cmd)
 		filter.aux = filter.aux->next;
 	while (filter.aux != NULL)
 	{
-		filter.tmp_line = filter.aux->val.str;
+		filter.tmp_line = filter.aux->val;
 		filter.tmp_line = ft_strjoin(filter.tmp_line, " ");
 		filter.line = ft_strjoin(filter.line, filter.tmp_line);
 		free(filter.tmp_line);
@@ -33,6 +33,6 @@ void	filter_cmd(t_node **cmd)
 	init_src(&filter.src, filter.line);
 	init_holder(&filter.holder);
 	filter.aux = (*cmd);
-	free_node(filter.aux);
+	free_node(&filter.aux);
 	*cmd = parser_command(&filter.src, &filter.holder);
 }

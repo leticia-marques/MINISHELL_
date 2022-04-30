@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:14:19 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 04:40:39 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ int	check_echo(t_node **cmd)
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
-		if (ft_strcmp(aux->val.str, "\'") == 0 || \
-			ft_strcmp(aux->val.str, "\"") == 0)
+		if (ft_strcmp(aux->val, "\'") == 0 || \
+			ft_strcmp(aux->val, "\"") == 0)
 		{
-			free(aux->val.str);
-			aux->val.str = ft_strdup("");
+			free(aux->val);
+			aux->val = ft_strdup("");
 		}
 		aux = aux->next;
 	}

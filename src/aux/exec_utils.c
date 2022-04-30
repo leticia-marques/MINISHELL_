@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:01:54 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 15:02:42 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@ int	extract_loop(t_node *arg, char **command)
 	i = -1;
 	while (arg)
 	{
-		if (!arg->val.str)
+		if (!arg->val)
 		{
-			while (arg && !arg->val.str)
+			while (arg && !arg->val)
 				arg = arg->next;
 			if (!arg)
 				break ;
-			else if (arg->val.str)
+			else if (arg->val)
 				continue ;
 		}
-		command[++i] = malloc(ft_strlen(arg->val.str) + 1);
+		command[++i] = malloc(ft_strlen(arg->val) + 1);
 		if (!command[i])
 		{
 			free_cmd(command);
 			return (0);
 		}
-		command[i] = arg->val.str;
+		command[i] = arg->val;
 		arg = arg->next;
 	}
 	return (i);

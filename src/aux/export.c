@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 00:08:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 22:35:51 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	export(t_node **cmd)
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
-		get_var_name(aux->val.str);
+		get_var_name(aux->val);
 		aux = aux->next;
 	}
 }

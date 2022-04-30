@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 02:13:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 00:48:35 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:27:37 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	init_holder(t_token_holder *holder)
 	holder->buf_size = 1024;
 	holder->token_buf = malloc(holder->buf_size);
 	holder->buf_position = -1;
-	holder->inside_quote = -1;
 }
 
 void	init_src(t_input *source, char *line)

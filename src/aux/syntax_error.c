@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 19:55:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 23:33:36 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	check_syntax_loop(t_node *aux, char *tmp)
 
 	while (aux)
 	{
-		str = aux->val.str;
+		str = aux->val;
 		if (aux->next != NULL)
-			tmp = aux->next->val.str;
+			tmp = aux->next->val;
 		if (ft_strcmp(str, ">") == 0 || ft_strcmp(str, ">>") == 0 || \
 			ft_strcmp(str, "<") == 0 || \
 			ft_strcmp(str, "<<") == 0 || str[0] == '\0')
@@ -46,7 +46,7 @@ int	check_syntax_error(t_node **cmd)
 	int		i;
 
 	aux = (*cmd)->first_arg;
-	if (ft_strcmp(aux->val.str, "echo") == 0)
+	if (ft_strcmp(aux->val, "echo") == 0)
 		return (1);
 	tmp = "";
 	i = check_syntax_loop(aux, tmp);

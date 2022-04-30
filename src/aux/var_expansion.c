@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 19:05:28 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@
 	temp = *aux;
 	while (temp)
 	{
-		if ((temp)->val.str[0] == '\"')
+		if ((temp)->val[0] == '\"')
 		{
-			clear_quote(&temp->val.str, '\"');
-			(*line) = getenv((temp)->val.str + 1);
+			clear_quote(&temp->val, '\"');
+			(*line) = getenv((temp)->val + 1);
 			*set = 1;
 		}
-		else if ((temp)->val.str[0] == '$')
+		else if ((temp)->val[0] == '$')
 		{
-			(*line) = getenv((temp)->val.str + 1);
+			(*line) = getenv((temp)->val + 1);
 			*set = 1;
 		}
-		else if ((temp)->val.str[0] == '\'')
-			clear_quote(&temp->val.str, '\'');
+		else if ((temp)->val[0] == '\'')
+			clear_quote(&temp->val, '\'');
 		(temp) = (temp)->next;
 		counter++;
 		if ((*line) != NULL)
@@ -86,7 +86,7 @@ void	var_expansion(t_node **cmd)
 			i = 0;
 			while (++i < counter && aux != NULL)
 				aux = aux->next;
-			free(aux->val.str);
+			free(aux->val);
 			set_value_str(aux, line);
 		}
 	}

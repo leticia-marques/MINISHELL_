@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 16:30:27 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 20:38:05 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 	vars->exit_code = 1;
 }
 
-int	here_doc(char *delimiter, t_node **cmd)
+int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 {
 	int	fd[2];
 	int	i;
@@ -72,6 +72,9 @@ int	here_doc(char *delimiter, t_node **cmd)
 		close(fd[1]);
 		dup2(fd[0], STDOUT_FILENO);
 		close(fd[0]);
+		free_vars_and_holder(holder);
+		free_node(cmd);
+		free(s->line);
 		exit(1);
 	}
 	else

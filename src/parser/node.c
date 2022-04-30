@@ -6,25 +6,23 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 00:34:15 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/24 19:34:23 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 21:24:11 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-t_node	*new_node(t_command_type type)
+t_node	*new_node()
 {
 	t_node	*node;
 
 	node = (t_node *) malloc(sizeof(t_node));
 	if (!node)
 		return (NULL);
-	node->val_type = VAL_STR;
 	node->prev = NULL;
 	node->next = NULL;
 	node->first_arg = NULL;
-	node->type = type;
-	node->val.str = NULL;
+	node->val = NULL;
 	node->args = 0;
 	node->cmd_path = NULL;
 	return (node);
