@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/16 18:23:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:27:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:42:52 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,9 @@ void	copy_and_walk(char **new, char **old, int *new_needle, int *old_needle);
 void	get_space(char **new, int new_needle, int old_needle, int len);
 void	clear_quotes(t_format *data, char *old, int len, char quote);
 void	expand_var(t_format *data, char *old, int len, char symbol);
+void	get_space_and_clear_quotes(t_format *data, int len, char **old);
+void	check_char(t_format *data, char *old, int len);
+void	check_unset_export(t_format **data, char *old, int len);
 
 //error
 void	error(int code, char *cmd_path, char **command);

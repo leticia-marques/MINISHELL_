@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 00:05:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 14:49:57 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/04/29 22:36:33 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ static t_token	*stop_parser(t_token *end_token)
 static void	get_quotes(t_token_holder *holder, t_input *src, \
 	char *c, char symbol)
 {
-	while (*c != -1)
+	while (*c != -1 && *c != '\0')
 	{
 		if (*c == symbol)
 		{
 			*c = next_char(src);
 			if (*c != -1)
 				fill_buffer(*c, holder);
-			while (*c != symbol)
+			while (*c != symbol && *c != '\0')
 			{
 				*c = next_char(src);
 				if (*c != -1 && *c != symbol)

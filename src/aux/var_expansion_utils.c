@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:13:02 by rtakeshi          #+#    #+#             */
-/*   Updated: 2022/04/28 05:13:49 by coder            ###   ########.fr       */
+/*   Updated: 2022/04/29 22:42:40 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	clear_quotes(t_format *data, char *old, int len, char quote)
 		}
 		get_space(&data->new, data->new_needle, data->old_needle, len);
 		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
-	}	
+	}
 	else if (quote == '\'')
 	{
 		get_space(&data->new, data->new_needle, data->old_needle, len);
@@ -63,4 +63,31 @@ void	clear_quotes(t_format *data, char *old, int len, char quote)
 				&data->new_needle, &data->old_needle);
 		copy_and_walk(&data->new, &old, &data->new_needle, &data->old_needle);
 	}
+}
+
+void	get_space_and_clear_quotes(t_format *data, int len, char **old)
+{
+	get_space(&data->new, data->new_needle, data->old_needle, len);
+	copy_and_walk(&data->new, old, &data->new_needle, &data->old_needle);
+}
+
+void	check_unset_export(t_format **data, char *old, int len)
+{
+	int	i;
+
+	i = (*data)->old_needle;
+	if (ft_strncmp(old + i, "export", 6) == 0 || \
+		ft_strncmp(old + i, "unset", 5) == 0)
+	{
+		while (old[(*data)->old_needle] != '|' && \
+			old[(*data)->old_needle] != '\0')
+		{
+			get_space(&(*data)->new, (*data)->new_needle, \
+				(*data)->old_needle, len);
+			copy_and_walk(&(*data)->new, &old, \
+				&(*data)->new_needle, &(*data)->old_needle);
+		}
+		return ;
+	}
+	check_char(*data, old, len);
 }
