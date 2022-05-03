@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/02 22:52:50 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ int	check_exit_expansion(t_node **cmd)
 {
 	t_node	*aux;
 	int		exit_code_size;
+	char	*str;
 
-	exit_code_size = ft_strlen(ft_itoa(vars->exit_code));
+	str = ft_itoa(vars->exit_code);
+	exit_code_size = ft_strlen(str);
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
@@ -26,11 +28,11 @@ int	check_exit_expansion(t_node **cmd)
 		{
 			free(aux->val);
 			aux->val = malloc(sizeof(char) * exit_code_size +1);
-			ft_strlcpy(aux->val, \
-				ft_itoa(vars->exit_code), exit_code_size + 1);
+			ft_strlcpy(aux->val, str, exit_code_size + 1);
 		}
 		aux = aux->next;
 	}
+	free(str);
 	return (1);
 }
 

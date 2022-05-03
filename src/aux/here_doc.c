@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 20:38:05 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 16:35:14 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 				write(fd[1], "\n", 1);
 			}
 			else
+			{
 				ft_putstr_fd(line, (*cmd)->outfile);
+				ft_putchar_fd('\n', (*cmd)->outfile);
+			}
 		}
 		else
 		{
@@ -66,6 +69,7 @@ int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 		return (errno);
 	}
 	i = fork();
+	printf("Delimite:%s\n", delimiter);
 	if (i == 0)
 	{
 		child_process(fd, delimiter, cmd);
@@ -73,7 +77,7 @@ int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 		dup2(fd[0], STDOUT_FILENO);
 		close(fd[0]);
 		free_vars_and_holder(holder);
-		free_node(cmd);
+		// free_node(cmd);
 		free(s->line);
 		exit(1);
 	}

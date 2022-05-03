@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 00:20:14 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ static int	has_redirection(t_node **cmd)
 	}
 	return (1);
 }
+
+static int	check_here_doc(t_node **cmd)
+{
+	t_node	*aux;
+
+	aux = (*cmd)->first_arg;
+	while (aux)
+	{
+		if (ft_strcmp(aux->val, "<<") == 0)
+			return (0);
+		aux = aux->next;
+	}
+	return (1);
+}
 int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 {
 	int		i;
@@ -69,7 +83,7 @@ int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 	init_cmd_fd(cmd);
 	if (!(*cmd)->first_arg)
 		return (0);
-	else if (ft_strncmp(str, "<<", 2) == 0)
+	else if (check_here_doc(cmd) == 0)
 		i = here_doc_call(cmd, holder, src);
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd);
