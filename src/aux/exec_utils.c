@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 15:01:54 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 02:59:08 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ int	extract_loop(t_node *arg, char **command)
 			else if (arg->val)
 				continue ;
 		}
-		command[++i] = malloc(ft_strlen(arg->val) + 1);
+		command[++i] = ft_strdup(arg->val);
 		if (!command[i])
 		{
 			free_cmd(command);
 			return (0);
 		}
-		command[i] = arg->val;
 		arg = arg->next;
 	}
 	return (i);
@@ -48,7 +47,7 @@ char	**extract_cmd(t_node *cmd)
 
 	arg = cmd->first_arg;
 	i = 0;
-	command = malloc(sizeof(char *) * cmd->args + 1);
+	command = malloc(sizeof(char *) * (cmd->args + 1));
 	i = extract_loop(arg, command);
 	command[++i] = NULL;
 	return (command);

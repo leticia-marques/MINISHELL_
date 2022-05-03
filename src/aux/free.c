@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:21:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 03:11:10 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	free_node(t_node **node)
 	while (aux)
 	{
 		tmp = aux->next;
-		free_node(&aux);
+		if (aux->val)
+			free(aux->val);
+		free(aux);
 		aux = tmp;
 	}
-	if ((*node)->val)
-		free((*node)->val);
 	free((*node));
 }
 

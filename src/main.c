@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:21:38 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 01:39:02 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 		if (i == 1)
 			exec_last_cmd(cmd, vars->env);
 		free(source.line);
-		// if (cmd)
-		// 	free_node(&cmd);
+		if (cmd)
+			free_node(&cmd);
 		return ;
 	}
 	else

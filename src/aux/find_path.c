@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:10 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/28 14:58:22 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 03:30:33 by sde-alva         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	*add_slash(char *str)
 
 	tmp = str;
 	str = ft_strjoin(tmp, "/");
+	if (tmp)
+		free(tmp);
 	if (!str)
 		return (NULL);
 	return (str);
