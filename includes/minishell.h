@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/04 15:08:06 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:22:29 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int		check_outfile(t_node **cmd, int i);//opens fds
 int		here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src);
 int		infile_outfile_call(t_node **cmd);
 void	filter_cmd(t_node **cmd);
-int		filter_cmd_here_doc(t_node **cmd);
+void	filter_cmd_here_doc(t_node **cmd);
 
 //void	var_expansion(t_node **cmd);
 char	*format_line(char *old, int len);

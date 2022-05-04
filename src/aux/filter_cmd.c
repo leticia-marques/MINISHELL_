@@ -6,13 +6,13 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:24:34 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 15:07:10 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:22:17 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-int	filter_filter(t_node **cmd)
+void	filter_cmd_here_doc(t_node **cmd)
 {
 	t_node		*aux;
 	t_filter	filter;
@@ -33,7 +33,6 @@ int	filter_filter(t_node **cmd)
 		}
 		aux = aux->next;
 	}
-	return (1);
 }
 
 void	filter_cmd(t_node **cmd)

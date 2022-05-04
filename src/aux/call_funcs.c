@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:18:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 15:08:33 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:20:51 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 			here_doc(aux->next->val, holder, cmd, src);
 			if (aux->prev != NULL && (*cmd)->outfile == -1)
 			{
-				filter_filter(cmd);
+				filter_cmd_here_doc(cmd);
 				return (1);
 			}
 			if ((*cmd)->args > 2 && (*cmd)->outfile == -1)
