@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:10 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:40:13 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:06:26 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,34 +67,42 @@ static char	*check_absolute_path(char *cmd)
 	return (NULL);
 }
 
+static char	*find_path_loop(char *cmd, char **splited_path, char **cmd_path)
+{
+	int	i;
+
+	i = -1;
+	while (splited_path[++i] != NULL)
+	{
+		(*cmd_path) = ft_strjoin(splited_path[i], cmd);
+		if (!cmd_path)
+			continue ;
+		if (access((*cmd_path), F_OK | X_OK) == 0)
+		{
+			ft_split_free(splited_path);
+			return ((*cmd_path));
+		}
+		free((*cmd_path));
+	}
+	(*cmd_path) = NULL;
+	return (NULL);
+}
+
 char	*find_path(char *cmd)
 {
 	char	*cmd_path;
 	char	**splited_path;
-	int		i;
 
 	cmd_path = check_absolute_path(cmd);
-	if (cmd_path == NULL)
+	if (cmd_path)
+		return (cmd_path);
+	splited_path = extract_paths();
+	if (splited_path)
 	{
-		i = -1;
-		splited_path = extract_paths();
-		if (splited_path)
-		{
-			while (splited_path[++i] != NULL)
-			{
-				cmd_path = ft_strjoin(splited_path[i], cmd);
-				if (!cmd_path)
-					continue ;
-				if (access(cmd_path, F_OK | X_OK) == 0)
-				{
-					ft_split_free(splited_path);
-					return (cmd_path);
-				}
-				free(cmd_path);
-			}
-		}
-		command_not_found(cmd, splited_path);
-		return (NULL);
+		find_path_loop(cmd, splited_path, &cmd_path);
+		if (cmd_path)
+			return (cmd_path);
 	}
-	return (cmd_path);
+	command_not_found(cmd, splited_path);
+	return (NULL);
 }

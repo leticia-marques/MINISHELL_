@@ -6,11 +6,35 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:24:34 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:07:10 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
+
+int	filter_filter(t_node **cmd)
+{
+	t_node		*aux;
+	t_filter	filter;
+	t_node		*tmp;
+
+	aux = (*cmd)->first_arg;
+	filter.line = "";
+	while (aux)
+	{
+		if (ft_strcmp(aux->val, "<<") == 0)
+		{
+			filter.aux = aux->next;
+			tmp = aux->prev;
+			free(aux);
+			tmp->next = filter.aux->next;
+			free(filter.aux);
+			aux = tmp;
+		}
+		aux = aux->next;
+	}
+	return (1);
+}
 
 void	filter_cmd(t_node **cmd)
 {

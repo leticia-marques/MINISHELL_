@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   call_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:18:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 20:35:40 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:08:33 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
-static void	filter_filter(t_node **cmd)
-{
-	t_node		*aux;
-	t_filter	filter;
-	t_node		*tmp;
-
-	aux = (*cmd)->first_arg;
-	filter.line = "";
-	while (aux)
-	{
-		if (ft_strcmp(aux->val, "<<") == 0)
-		{
-			filter.aux = aux->next;
-			tmp = aux->prev;
-			free(aux);
-			tmp->next = filter.aux->next;
-			free(filter.aux);
-			aux = tmp;
-		}
-		aux = aux->next;
-	}
-}
 
 int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 {
@@ -42,22 +19,19 @@ int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
-		if (ft_strcmp(aux->val, "<<") == 0)
+		if (ft_strcmp(aux->val, "<<") == 0 && check_syntax_error(cmd) != 0)
 		{
-			if (check_syntax_error(cmd) != 0)
+			check_outfile(cmd, 0);
+			here_doc(aux->next->val, holder, cmd, src);
+			if (aux->prev != NULL && (*cmd)->outfile == -1)
 			{
-				check_outfile(cmd, 0);
-				here_doc(aux->next->val, holder, cmd, src);
-				if (aux->prev != NULL && (*cmd)->outfile == -1)
-				{
-					filter_filter(cmd);
-					return (1);
-				}
-				if ((*cmd)->args > 2 && (*cmd)->outfile == -1)
-				{
-					filter_cmd(cmd);
-					return (1);
-				}
+				filter_filter(cmd);
+				return (1);
+			}
+			if ((*cmd)->args > 2 && (*cmd)->outfile == -1)
+			{
+				filter_cmd(cmd);
+				return (1);
 			}
 		}
 		aux = aux->next;
