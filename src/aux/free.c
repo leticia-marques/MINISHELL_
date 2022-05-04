@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:21:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:37:10 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:56:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	free_cmd(char **command)
 		free(command[i]);
 		i++;
 	}
+	free(command);
 }
 
 void	free_vars_and_holder(t_token_holder *holder)
