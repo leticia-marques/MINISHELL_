@@ -3,21 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 16:35:14 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:46:24 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-void	here_doc_sig(int sig)
+static void	child_process_aux(char *delimiter, t_node **cmd, char *line, int n1)
 {
-	vars->exit_code = 130;
-	(void)sig;
-	write(1, "\n", 1);
-	exit (130);
+	if (n1 == 1)
+	{
+		printf("minishell: warning: here-document delimited ");
+		printf("by end-of-file (wanted `%s`)\n", delimiter);
+	}
+	if (n1 == 2)
+	{
+		ft_putstr_fd(line, (*cmd)->outfile);
+		ft_putchar_fd('\n', (*cmd)->outfile);
+	}
+}
+
+static void	child_process_aux2(char *line, int fd[2])
+{
+	write(fd[1], line, ft_strlen(line));
+	write(fd[1], "\n", 1);
 }
 
 static void	child_process(int fd[2], char *delimiter, t_node **cmd)
@@ -32,23 +44,14 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 		if (line != NULL && (ft_strcmp(line, delimiter) != 0))
 		{
 			if ((*cmd)->outfile == -1)
-			{
-				write(fd[1], line, ft_strlen(line));
-				write(fd[1], "\n", 1);
-			}
+				child_process_aux2(line, fd);
 			else
-			{
-				ft_putstr_fd(line, (*cmd)->outfile);
-				ft_putchar_fd('\n', (*cmd)->outfile);
-			}
+				child_process_aux(delimiter, cmd, line, 2);
 		}
 		else
 		{
 			if (line == NULL)
-			{
-				printf("minishell: warning: here-document delimited ");
-				printf("by end-of-file (wanted `%s`)\n", delimiter);
-			}
+				child_process_aux(delimiter, cmd, line, 1);
 			break ;
 		}
 	}
@@ -57,10 +60,16 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 	vars->exit_code = 1;
 }
 
+static void	here_doc_aux(t_token_holder *holder, t_node **cmd, t_input *s)
+{
+	free_vars_and_holder(holder);
+	free_node(cmd);
+	free(s->line);
+}
+
 int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 {
 	int	fd[2];
-	int	i;
 
 	signal(SIGINT, SIG_IGN);
 	if (pipe(fd) == 1)
@@ -68,17 +77,14 @@ int	here_doc(char *delimiter, t_token_holder *holder, t_node **cmd, t_input *s)
 		perror("Error:");
 		return (errno);
 	}
-	i = fork();
-	printf("Delimite:%s\n", delimiter);
-	if (i == 0)
+	holder->here_doc_fork = fork();
+	if (holder->here_doc_fork == 0)
 	{
 		child_process(fd, delimiter, cmd);
 		close(fd[1]);
 		dup2(fd[0], STDOUT_FILENO);
 		close(fd[0]);
-		free_vars_and_holder(holder);
-		// free_node(cmd);
-		free(s->line);
+		here_doc_aux(holder, cmd, s);
 		exit(1);
 	}
 	else

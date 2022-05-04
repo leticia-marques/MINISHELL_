@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 01:39:02 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:05:07 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 	}
 }
 
+static void	read_prompt_aux(t_token_holder *holder)
+{
+	free_vars_and_holder(holder);
+	printf("exit\n");
+	exit(5);
+}
+
 static void	read_prompt(t_token_holder *holder)
 {
 	while (1)
@@ -60,11 +67,7 @@ static void	read_prompt(t_token_holder *holder)
 		if (vars->line != NULL)
 		{
 			if (ft_strcmp(vars->line, "exit") == 0)
-			{
-				free_vars_and_holder(holder);
-				printf("exit\n");
-				exit(5);
-			}
+				read_prompt_aux(holder);
 			add_history(vars->line);
 			if (!(ft_strcmp(vars->line, "") == 0))
 				parse_and_call_exec(vars->line, holder);
@@ -83,6 +86,7 @@ static void	read_prompt(t_token_holder *holder)
 int	main(int argc, char **argv, char **envp)
 {
 	t_token_holder	holder;
+
 	(void)argc;
 	(void)argv;
 	init_holder(&holder);

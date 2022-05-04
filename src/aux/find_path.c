@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sde-alva <sde-alva@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:10 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 03:30:33 by sde-alva         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:04:14 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ char	*find_path(char *cmd)
 	cmd_path = check_absolute_path(cmd);
 	if (cmd_path == NULL)
 	{
-
 		i = -1;
 		splited_path = extract_paths();
 		if (splited_path)

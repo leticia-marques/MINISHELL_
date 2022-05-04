@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 00:05:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 22:36:33 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:58:41 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,7 @@ static void	lexer_loop(t_token_holder *holder, t_input *src, char *c)
 		else if (*c == '|')
 			break ;
 		else
-		{
 			fill_buffer(*c, holder);
-		}
 		if (*c != ' ')
 			*c = next_char(src);
 	}

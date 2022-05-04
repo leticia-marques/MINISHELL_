@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 00:20:14 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:36:52 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
 
 static int	check_builtin(t_node **cmd, t_input *src)
 {
@@ -50,8 +49,7 @@ static int	has_redirection(t_node **cmd)
 	t_node	*aux;
 
 	aux = (*cmd)->first_arg;
-
-	while(aux)
+	while (aux)
 	{
 		if (ft_strchr(aux->val, '<') || ft_strchr(aux->val, '>'))
 			return (0);
@@ -73,6 +71,7 @@ static int	check_here_doc(t_node **cmd)
 	}
 	return (1);
 }
+
 int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 {
 	int		i;

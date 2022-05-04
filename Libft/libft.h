@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 00:16:58 by lemarque          #+#    #+#             */
-/*   Updated: 2022/03/17 00:20:03 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 22:12:16 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -497,6 +497,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 int		ft_strcmp(char *str, char *str2);
 void	ft_split_free(char **args);
 long	ft_atol(const char *str);
-char 	**ft_split_quotes(char const *str, char c);
+char	**ft_split_quotes(char const *str, char c);
 
 #endif

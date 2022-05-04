@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 22:50:26 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:16:00 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static char	*find_var(char *var)
 
 static char	*expand_loop(t_format *data, char *old, char *symbol)
 {
-	int	var_len;
+	int		var_len;
 	char	*var;
 
 	var_len = 0;
 	var = ft_calloc(sizeof(char), strlen(old + data->old_needle));
 	while (old[data->old_needle] != *symbol && old[data->old_needle] != '\0' \
-		&&	old[data->old_needle] != '\'' && old[data->old_needle] != '\"')
+		&& old[data->old_needle] != '\'' && old[data->old_needle] != '\"')
 	{
 		copy_and_walk(&var, &old, &var_len, &data->old_needle);
 		if (ft_isalpha(old[data->old_needle]) == 0 \

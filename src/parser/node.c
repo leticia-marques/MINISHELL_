@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 00:34:15 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:24:11 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:57:55 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-t_node	*new_node()
+t_node	*new_node(void)
 {
 	t_node	*node;
 

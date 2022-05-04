@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/02 22:52:50 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:37:37 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
-
 
 int	check_exit_expansion(t_node **cmd)
 {

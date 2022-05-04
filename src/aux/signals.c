@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 23:32:04 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/23 21:59:50 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 19:20:08 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ void	signal_aborted(int sig)
 	(void)sig;
 	write(1, "Quit (core dumped)\n", 19);
 	return ;
+}
+
+void	here_doc_sig(int sig)
+{
+	vars->exit_code = 130;
+	(void)sig;
+	write(1, "\n", 1);
+	exit (130);
 }

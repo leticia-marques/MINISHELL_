@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:18:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 16:33:07 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 20:35:40 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 static void	filter_filter(t_node **cmd)
 {
-	t_node	*aux;
+	t_node		*aux;
 	t_filter	filter;
 	t_node		*tmp;
 
-
-	aux =(*cmd)->first_arg;
+	aux = (*cmd)->first_arg;
 	filter.line = "";
 	while (aux)
 	{
@@ -29,7 +28,6 @@ static void	filter_filter(t_node **cmd)
 			tmp = aux->prev;
 			free(aux);
 			tmp->next = filter.aux->next;
-			// filter.aux->next->prev = tmp;
 			free(filter.aux);
 			aux = tmp;
 		}
@@ -42,10 +40,9 @@ int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 	t_node	*aux;
 
 	aux = (*cmd)->first_arg;
-
 	while (aux)
 	{
-		if(ft_strcmp(aux->val, "<<") == 0)
+		if (ft_strcmp(aux->val, "<<") == 0)
 		{
 			if (check_syntax_error(cmd) != 0)
 			{
@@ -56,7 +53,6 @@ int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 					filter_filter(cmd);
 					return (1);
 				}
-
 				if ((*cmd)->args > 2 && (*cmd)->outfile == -1)
 				{
 					filter_cmd(cmd);
