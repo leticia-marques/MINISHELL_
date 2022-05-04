@@ -14,7 +14,7 @@
 
 static void	handling_signal(int sig)
 {
-	vars->exit_code = 130;
+	g_vars->exit_code = 130;
 	(void)sig;
 	write(1, "\n", 1);
 	exit (130);
@@ -36,7 +36,7 @@ void	read_infile(void)
 				printf("\n");
 			break ;
 		}
-		vars->exit_code = 0;
+		g_vars->exit_code = 0;
 		exit(0);
 	}
 	else

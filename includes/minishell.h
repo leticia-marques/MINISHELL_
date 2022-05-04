@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/03 21:53:32 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:27:28 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_vars
 	char	old_dir[1024];
 }			t_vars;
 
-extern t_vars	*vars;
+extern t_vars	*g_vars;
 
 void	init_vars(char **envp);
 //tokenizer structs

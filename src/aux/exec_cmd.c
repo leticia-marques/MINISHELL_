@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 00:52:21 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 20:37:11 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:39:57 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ static void	child_process(t_node *cmd, char **command, char **envp, int fd[2])
 
 static void	parent_process(t_node *cmd, char **command, int fd[2])
 {
-	waitpid(vars->pid, &vars->w_status, 0);
-	if (!WIFSIGNALED(vars->w_status))
-		vars->exit_code = WEXITSTATUS(vars->w_status);
+	waitpid(g_vars->pid, &g_vars->w_status, 0);
+	if (!WIFSIGNALED(g_vars->w_status))
+		g_vars->exit_code = WEXITSTATUS(g_vars->w_status);
 	else
-		vars->exit_code = vars->w_status + 128;
+		g_vars->exit_code = g_vars->w_status + 128;
 	if (cmd->outfile != -1)
 		close(cmd->outfile);
 	close(fd[1]);
@@ -48,10 +48,10 @@ void	exec_cmd(t_node *cmd, char **command, char **envp, int *fd)
 	}
 	if (pipe(fd) == -1)
 		error(1, cmd->cmd_path, command);
-	vars->pid = fork();
-	if (vars->pid == -1)
+	g_vars->pid = fork();
+	if (g_vars->pid == -1)
 		error(1, cmd->cmd_path, command);
-	else if (vars->pid == 0)
+	else if (g_vars->pid == 0)
 		child_process(cmd, command, envp, fd);
 	else
 		parent_process(cmd, command, fd);

@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 20:36:52 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:40:28 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_builtin(t_node **cmd, t_input *src)
 {
 	if (ft_strcmp((*cmd)->first_arg->val, "export") == 0)
 	{
-		vars->exit_code = 0;
+		g_vars->exit_code = 0;
 		if (src->position >= src->line_size && (*cmd)->first_arg->next != NULL)
 			export(cmd);
 		else

@@ -6,18 +6,18 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 22:05:07 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:28:50 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_vars	*vars;
+t_vars	*g_vars;
 
 static void	parse_and_call_exec_aux(int i, t_input	*source, t_node	*cmd)
 {
 	if (i == 1)
-		check_cmd(cmd, vars->env);
+		check_cmd(cmd, g_vars->env);
 	source->position++;
 }
 
@@ -37,7 +37,7 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 	{
 		signal(SIGQUIT, signal_aborted);
 		if (i == 1)
-			exec_last_cmd(cmd, vars->env);
+			exec_last_cmd(cmd, g_vars->env);
 		free(source.line);
 		if (cmd)
 			free_node(&cmd);
@@ -62,24 +62,24 @@ static void	read_prompt(t_token_holder *holder)
 	while (1)
 	{
 		signal_treatment();
-		vars->line = NULL;
-		vars->line = readline(vars->prompt);
-		if (vars->line != NULL)
+		g_vars->line = NULL;
+		g_vars->line = readline(g_vars->prompt);
+		if (g_vars->line != NULL)
 		{
-			if (ft_strcmp(vars->line, "exit") == 0)
+			if (ft_strcmp(g_vars->line, "exit") == 0)
 				read_prompt_aux(holder);
-			add_history(vars->line);
-			if (!(ft_strcmp(vars->line, "") == 0))
-				parse_and_call_exec(vars->line, holder);
-			free(vars->line);
+			add_history(g_vars->line);
+			if (!(ft_strcmp(g_vars->line, "") == 0))
+				parse_and_call_exec(g_vars->line, holder);
+			free(g_vars->line);
 		}
-		else if (vars->line == NULL)
+		else if (g_vars->line == NULL)
 		{
 			write(1, "exit\n", 5);
 			break ;
 		}
-		dup2(vars->save_stdin, 0);
-		dup2(vars->save_stdout, 1);
+		dup2(g_vars->save_stdin, 0);
+		dup2(g_vars->save_stdout, 1);
 	}
 }
 

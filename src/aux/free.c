@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 03:21:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 19:49:25 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:37:10 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	free_cmd(char **command)
 
 void	free_vars_and_holder(t_token_holder *holder)
 {
-	if (vars->line != NULL)
-		free(vars->line);
-	if (vars->prompt != NULL)
-		free(vars->prompt);
+	if (g_vars->line != NULL)
+		free(g_vars->line);
+	if (g_vars->prompt != NULL)
+		free(g_vars->prompt);
 	if (holder->token_buf)
 		free(holder->token_buf);
-	free(vars);
+	free(g_vars);
 }

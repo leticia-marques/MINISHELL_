@@ -18,7 +18,7 @@ void	redirect_error(char *symbol)
 		printf("bash: syntax error near unexpected token 'newline'\n");
 	else
 		printf("bash: syntax error near unexpected token `%s`\n", symbol);
-	vars->exit_code = 2;
+	g_vars->exit_code = 2;
 }
 
 void	error(int code, char *cmd_path, char **command)
@@ -45,5 +45,5 @@ void	command_not_found(char *cmd, char **splited_path)
 	printf("%s:command not found\n", cmd);
 	if (splited_path)
 		ft_split_free(splited_path);
-	vars->exit_code = 127;
+	g_vars->exit_code = 127;
 }

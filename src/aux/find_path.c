@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 23:01:10 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 22:04:14 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:40:13 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static char	**extract_paths(void)
 	int		i;
 
 	i = -1;
-	while (vars->env[++i])
+	while (g_vars->env[++i])
 	{
-		if (ft_strncmp("PATH=", vars->env[i], 5) == 0)
+		if (ft_strncmp("PATH=", g_vars->env[i], 5) == 0)
 		{
-			path = ft_strdup(&vars->env[i][5]);
+			path = ft_strdup(&g_vars->env[i][5]);
 			splitted_path = ft_split(path, ':');
 			free(path);
 			if (!splitted_path)

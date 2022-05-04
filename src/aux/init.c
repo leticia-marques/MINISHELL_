@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 02:13:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:27:37 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:38:40 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,45 +39,45 @@ void	get_prompt(void)
 {
 	char	*aux;
 
-	vars->prompt = ft_strjoin(PURPLE, vars->user);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, "@");
+	g_vars->prompt = ft_strjoin(PURPLE, g_vars->user);
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, "@");
 	free(aux);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, vars->name);
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, g_vars->name);
 	free(aux);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, WHITE);
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, WHITE);
 	free(aux);
-	aux = ft_strjoin(vars->prompt, ":");
-	free(vars->prompt);
-	vars->prompt = ft_strjoin(aux, BLUE);
+	aux = ft_strjoin(g_vars->prompt, ":");
+	free(g_vars->prompt);
+	g_vars->prompt = ft_strjoin(aux, BLUE);
 	free(aux);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, vars->path);
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, g_vars->path);
 	free(aux);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, WHITE);
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, WHITE);
 	free(aux);
-	aux = vars->prompt;
-	vars->prompt = ft_strjoin(aux, "$ ");
+	aux = g_vars->prompt;
+	g_vars->prompt = ft_strjoin(aux, "$ ");
 	free(aux);
 }
 
 void	init_vars(char **envp)
 {
-	vars = (t_vars *)malloc(sizeof(t_vars));
-	vars->save_stdin = dup(0);
-	vars->save_stdout = dup(1);
-	vars->user = getenv("USER");
-	vars->name = getenv("HOSTNAME");
-	if (vars->name == NULL)
-		vars->name = getenv("NAME");
-	vars->env = envp;
-	vars->pid = 0;
-	vars->exit_code = 0;
-	getcwd(vars->old_dir, 1024);
-	getcwd(vars->path, 1024);
+	g_vars = (t_vars *)malloc(sizeof(t_vars));
+	g_vars->save_stdin = dup(0);
+	g_vars->save_stdout = dup(1);
+	g_vars->user = getenv("USER");
+	g_vars->name = getenv("HOSTNAME");
+	if (g_vars->name == NULL)
+		g_vars->name = getenv("NAME");
+	g_vars->env = envp;
+	g_vars->pid = 0;
+	g_vars->exit_code = 0;
+	getcwd(g_vars->old_dir, 1024);
+	getcwd(g_vars->path, 1024);
 	get_prompt();
-	vars->count = 1;
+	g_vars->count = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 19:16:00 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:40:32 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static char	*find_var(char *var)
 	line = NULL;
 	if (var != NULL)
 	{
-		while (vars->env[++i] != NULL)
+		while (g_vars->env[++i] != NULL)
 		{
-			if (ft_strncmp(vars->env[i], var, ft_strlen(var)) == 0)
+			if (ft_strncmp(g_vars->env[i], var, ft_strlen(var)) == 0)
 			{
-				if (vars->env[i][ft_strlen(var)] == '=')
+				if (g_vars->env[i][ft_strlen(var)] == '=')
 				{
-					line = vars->env[i] + ft_strlen(var) + 1;
+					line = g_vars->env[i] + ft_strlen(var) + 1;
 					break ;
 				}
 			}

@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 19:46:24 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:40:12 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 	}
 	if (line)
 		free(line);
-	vars->exit_code = 1;
+	g_vars->exit_code = 1;
 }
 
 static void	here_doc_aux(t_token_holder *holder, t_node **cmd, t_input *s)

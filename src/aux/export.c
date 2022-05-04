@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 00:08:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:41:03 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ static void	export_var(char *var_name)
 	int		i;
 
 	i = 0;
-	while (vars->env[i] != NULL)
+	while (g_vars->env[i] != NULL)
 				i++;
 	new_env = malloc(sizeof(char *) * i + 2);
 	i = -1;
-	while (vars->env[++i] != NULL)
+	while (g_vars->env[++i] != NULL)
 	{
-		if (vars->env[i] != NULL)
-			new_env[i] = ft_strdup(vars->env[i]);
+		if (g_vars->env[i] != NULL)
+			new_env[i] = ft_strdup(g_vars->env[i]);
 	}
 	new_env[i] = strdup(var_name);
 	new_env[++i] = NULL;
-	vars->env = new_env;
+	g_vars->env = new_env;
 }
 
 static void	get_var_name(char *var_name)
@@ -73,12 +73,12 @@ void	export_env(t_input *src)
 	char	**new_env;
 
 	i = -1;
-	while (vars->env[++i] != NULL)
+	while (g_vars->env[++i] != NULL)
 		;
 	new_env = malloc(sizeof(char *) * (i + 1));
 	i = -1;
-	while (vars->env[++i] != NULL)
-			new_env[i] = vars->env[i];
+	while (g_vars->env[++i] != NULL)
+			new_env[i] = g_vars->env[i];
 	new_env[i] = NULL;
 	order_env(new_env);
 	write_to_pipe(new_env, src);

@@ -6,7 +6,7 @@
 /*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 20:37:37 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/03 23:43:02 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	check_exit_expansion(t_node **cmd)
 	int		exit_code_size;
 	char	*str;
 
-	str = ft_itoa(vars->exit_code);
+	str = ft_itoa(g_vars->exit_code);
 	exit_code_size = ft_strlen(str);
 	aux = (*cmd)->first_arg;
 	while (aux)
@@ -42,7 +42,7 @@ int	exit_builtin(t_node *cmd)
 	i = -1;
 	if (cmd->args > 2)
 	{
-		vars->exit_code = 127;
+		g_vars->exit_code = 127;
 		printf("bash: exit: too many arguments");
 		return (0);
 	}
@@ -56,8 +56,8 @@ int	exit_builtin(t_node *cmd)
 			exit(2);
 		}
 	}
-	vars->exit_code = ft_atoi(cmd->first_arg->next->val);
+	g_vars->exit_code = ft_atoi(cmd->first_arg->next->val);
 	free_node(&cmd);
 	printf("exit\n");
-	exit(vars->exit_code);
+	exit(g_vars->exit_code);
 }
