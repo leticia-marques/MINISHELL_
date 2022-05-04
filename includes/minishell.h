@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/04 15:22:29 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:36:48 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ void	write_to_pipe(char **new_env, t_input *src);
 void	unset(t_node **cmd);
 int		cd(t_node *cmd);
 int		exit_builtin(t_node *cmd);
-int		check_echo(t_node **cmd);
+int		check_echo(t_node **cmd, t_input **src);
 int		check_exit_expansion(t_node **cmd);
 void	get_prompt(void);
 #endif

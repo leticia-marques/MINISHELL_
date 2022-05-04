@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:40:28 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:36:01 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	check_builtin(t_node **cmd, t_input *src)
 	else if (ft_strcmp((*cmd)->first_arg->val, "exit") == 0)
 		exit_builtin(*cmd);
 	else if (ft_strcmp((*cmd)->first_arg->val, "echo") == 0)
-		return (check_echo(cmd));
+		return (check_echo(cmd, &src));
 	return (1);
 }
 
