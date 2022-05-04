@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   last_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 19:17:06 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/03 23:43:36 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 15:40:58 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ void	signal_to_cat(int sig)
 	return ;
 }
 
-static void	parent_process(char *cmd_path, char **command)
+static void	parent_process(char *cmd_path)
 {
 	waitpid(g_vars->pid, &g_vars->w_status, 0);
 	if (!WIFSIGNALED(g_vars->w_status))
 		g_vars->exit_code = WEXITSTATUS(g_vars->w_status);
 	else
 		g_vars->exit_code = g_vars->w_status + 128;
-	ft_split_free(command);
 	free(cmd_path);
 }
 
@@ -54,5 +53,6 @@ void	exec_last_cmd(t_node *cmd, char **envp)
 			error(1, cmd_path, command);
 	}
 	else
-		parent_process(cmd_path, command);
+		parent_process(cmd_path);
+	ft_split_free(command);
 }
