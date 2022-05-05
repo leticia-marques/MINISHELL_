@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 17:23:36 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:00:58 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 	{
 		parse_and_call_exec_aux(i, &source, cmd);
 		parse_and_call_exec((char *)(source.line + source.position), holder);
+		if (cmd)
+			free_node(&cmd);
 	}
 }
 

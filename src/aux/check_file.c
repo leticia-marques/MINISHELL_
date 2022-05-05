@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/29 21:22:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 16:07:25 by jinacio-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void	first_outfile(t_node **cmd, t_node	**aux)
 
 static void	multiple_outfiles(t_node **cmd, t_node	**aux)
 {
-	t_node	*redirect;
-	t_node	*file;
+	// t_node	*redirect;
+	// t_node	*file;
 
 	if ((*aux)->next)
 	{
@@ -52,11 +52,11 @@ static void	multiple_outfiles(t_node **cmd, t_node	**aux)
 			| O_CREAT | O_APPEND, 0777);
 		if ((*cmd)->outfile == -1)
 			error_infile(cmd, 2);
-		redirect = (*aux);
-		file = (*aux)->next;
+		// redirect = (*aux);
+		// file = (*aux)->next;
 		*aux = (*aux)->next->next;
-		free_node(&redirect);
-		free_node(&file);
+		// free_node(&redirect);
+		// free_node(&file);
 	}
 }
 
