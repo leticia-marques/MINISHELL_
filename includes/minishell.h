@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/04 17:36:48 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 00:00:42 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,9 @@ void	init_src(t_input *source, char *line);
 int		check_argv(t_node **cmd, t_input *src, t_token_holder *holder);
 int		here_doc(char *delimiter, t_token_holder *holder,
 			t_node **cmd, t_input *s);
-int		check_outfile(t_node **cmd, int i);//opens fds
+int		check_outfile(t_node **cmd, int i, t_input *src);//opens fds
 int		here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src);
-int		infile_outfile_call(t_node **cmd);
+int		infile_outfile_call(t_node **cmd, t_input *src);
 void	filter_cmd(t_node **cmd);
 void	filter_cmd_here_doc(t_node **cmd);
 
@@ -185,7 +185,7 @@ void	order_env(char **new_env);
 void	write_to_pipe(char **new_env, t_input *src);
 void	unset(t_node **cmd);
 int		cd(t_node *cmd);
-int		exit_builtin(t_node *cmd);
+int		exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src);
 int		check_echo(t_node **cmd, t_input **src);
 int		check_exit_expansion(t_node **cmd);
 void	get_prompt(void);

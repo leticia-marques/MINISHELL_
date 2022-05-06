@@ -6,13 +6,13 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 17:36:01 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:08:05 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-static int	check_builtin(t_node **cmd, t_input *src)
+static int	check_builtin(t_node **cmd, t_input *src, t_token_holder *holder)
 {
 	if (ft_strcmp((*cmd)->first_arg->val, "export") == 0)
 	{
@@ -32,7 +32,7 @@ static int	check_builtin(t_node **cmd, t_input *src)
 	else if (ft_strcmp((*cmd)->first_arg->val, "cd") == 0)
 		return (cd(*cmd));
 	else if (ft_strcmp((*cmd)->first_arg->val, "exit") == 0)
-		exit_builtin(*cmd);
+		exit_builtin(*cmd, holder, src);
 	else if (ft_strcmp((*cmd)->first_arg->val, "echo") == 0)
 		return (check_echo(cmd, &src));
 	return (1);
@@ -85,13 +85,13 @@ int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 	else if (check_here_doc(cmd) == 0)
 		i = here_doc_call(cmd, holder, src);
 	else if (ft_strncmp(str, "<", 1) == 0)
-		i = infile_outfile_call(cmd);
-	else if (has_redirection(cmd) == 0)
-		i = check_outfile(cmd, 1);
+		i = infile_outfile_call(cmd, src);
+	else if (has_redirection(cmd) == 0  )
+		i = check_outfile(cmd, 1, src);
 	else
 	{
 		check_exit_expansion(cmd);
-		i = check_builtin(cmd, src);
+		i = check_builtin(cmd, src, holder);
 	}
 	if (i != -1)
 		return (i);

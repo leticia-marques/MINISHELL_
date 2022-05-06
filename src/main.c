@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 17:23:36 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 21:54:40 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 		if (i == 1)
 			exec_last_cmd(cmd, g_vars->env);
 		free(source.line);
-		if (cmd)
-			free_node(&cmd);
+		// if (cmd)
+		// 	free_node(&cmd);
 		return ;
 	}
 	else
@@ -57,6 +57,19 @@ static void	read_prompt_aux(t_token_holder *holder)
 	exit(5);
 }
 
+static int	is_all_space()
+{
+	int	i;
+	i = -1;
+	while(g_vars->line[++i])
+	{
+		if (g_vars->line[i] != ' ')
+			return (0);
+	}
+	free(g_vars->line);
+	return (1);
+}
+
 static void	read_prompt(t_token_holder *holder)
 {
 	while (1)
@@ -64,7 +77,7 @@ static void	read_prompt(t_token_holder *holder)
 		signal_treatment();
 		g_vars->line = NULL;
 		g_vars->line = readline(g_vars->prompt);
-		if (g_vars->line != NULL)
+		if (g_vars->line != NULL && is_all_space() == 0)
 		{
 			if (ft_strcmp(g_vars->line, "exit") == 0)
 				read_prompt_aux(holder);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:43:02 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/04 18:12:29 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ int	check_exit_expansion(t_node **cmd)
 	return (1);
 }
 
-int	exit_builtin(t_node *cmd)
+int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
 {
 	int	i;
+	int	exit_code;
 
 	i = -1;
 	if (cmd->args > 2)
@@ -57,7 +58,10 @@ int	exit_builtin(t_node *cmd)
 		}
 	}
 	g_vars->exit_code = ft_atoi(cmd->first_arg->next->val);
+	exit_code = g_vars->exit_code;
 	free_node(&cmd);
+	free_vars_and_holder(holder);
+	free(src->line);
 	printf("exit\n");
-	exit(g_vars->exit_code);
+	exit(exit_code);
 }
