@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/05 23:05:11 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 00:32:13 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,37 @@ static int	is_all_space()
 	return (1);
 }
 
+int	check_string_util(char *str, int *i, char c)
+{
+
+	if (str[*i+1] && str[*i+1] == c)
+		i++;
+	while (str[++*i] == ' ' && str[*i])
+		;
+	if (str[*i] == '<' || str[*i] == '>' || str[*i] == '\0')
+	{
+		redirect_error(str+*i);
+		return (1);
+	}
+	return (0);
+}
+
+int check_string(char *str)
+{
+    int i;
+	int	ret;
+
+    i = -1;
+    while (str[++i])
+    {
+        if (str[i] == '>' || '<')
+			ret = check_string_util(str, &i, str[i]);
+		if (ret == 1)
+			break;
+    }
+    return (ret);
+}
+
 static void	read_prompt(t_token_holder *holder)
 {
 	while (1)
@@ -79,7 +110,8 @@ static void	read_prompt(t_token_holder *holder)
 		signal_treatment();
 		g_vars->line = NULL;
 		g_vars->line = readline(g_vars->prompt);
-		if (g_vars->line != NULL && is_all_space() == 0)
+		check_string(g_vars->line);
+		if (g_vars->line != NULL && is_all_space() == 0 && check_string(g_vars->line) == 0)
 		{
 			if (ft_strcmp(g_vars->line, "exit") == 0)
 				read_prompt_aux(holder);

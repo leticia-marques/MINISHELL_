@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/05 23:04:42 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/05 23:35:45 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ static	void	open_file(t_node **aux, t_node **cmd)
 		(*aux)->prev = prev;
 	free_node(&infile);
 	free_node(&redirect);
-
 }
 
 static void	has_outfile(t_node **cmd)
@@ -139,6 +138,7 @@ static void	has_outfile(t_node **cmd)
 		}
 	}
 }
+
 int	check_outfile(t_node **cmd, int i, t_input *src)
 {
 	if (check_syntax_error(cmd) != 0)
