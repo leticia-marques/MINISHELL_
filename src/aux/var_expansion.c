@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 21:16:04 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:43:04 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*expand_loop(t_format *data, char *old, char *symbol)
 	char	*var;
 
 	var_len = 0;
-	var = ft_calloc(sizeof(char), ft_strlen(old + data->old_needle));
+	var = ft_calloc(sizeof(char), ft_strlen(old + data->old_needle) + 1);
 	while (old[data->old_needle] != *symbol && old[data->old_needle] != '\0' \
 		&& old[data->old_needle] != '\'' && old[data->old_needle] != '\"')
 	{
@@ -56,7 +56,6 @@ static char	*expand_loop(t_format *data, char *old, char *symbol)
 			&& old[data->old_needle] != '$')
 			break ;
 	}
-	printf("SIZE:%d\n", var_len);
 	var[var_len] = '\0';
 	return (var);
 }
