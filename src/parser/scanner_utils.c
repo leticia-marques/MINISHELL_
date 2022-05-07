@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scanner_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rtakeshi <rtakeshi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 21:33:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/04/11 18:51:30 by rtakeshi         ###   ########.fr       */
+/*   Updated: 2022/05/07 11:22:14 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
