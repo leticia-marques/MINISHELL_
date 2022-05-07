@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/05 00:00:42 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:11:57 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ typedef struct s_vars
 	int		save_stdin;
 	int		save_stdout;
 	char	**env;
-	int		count;
 	int		w_status;
 	int		exit_code;
 	int		pid;
 	char	old_dir[1024];
+	int		n_env;
 }			t_vars;
 
 extern t_vars	*g_vars;

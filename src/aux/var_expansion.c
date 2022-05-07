@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:40:32 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/06 21:16:04 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@ static char	*find_var(char *var)
 {
 	char	*line;
 	int		i;
+	int		size;
 
+	size = ft_strlen(var);
 	i = -1;
 	line = NULL;
 	if (var != NULL)
 	{
 		while (g_vars->env[++i] != NULL)
 		{
-			if (ft_strncmp(g_vars->env[i], var, ft_strlen(var)) == 0)
+			if (ft_strncmp(g_vars->env[i], var, size) == 0)
 			{
-				if (g_vars->env[i][ft_strlen(var)] == '=')
+				if (g_vars->env[i][size] == '=')
 				{
-					line = g_vars->env[i] + ft_strlen(var) + 1;
+					line = g_vars->env[i] + ( size + 1);
+					// printf("Line:%s\n", var);
 					break ;
 				}
 			}
@@ -44,7 +47,7 @@ static char	*expand_loop(t_format *data, char *old, char *symbol)
 	char	*var;
 
 	var_len = 0;
-	var = ft_calloc(sizeof(char), strlen(old + data->old_needle));
+	var = ft_calloc(sizeof(char), ft_strlen(old + data->old_needle));
 	while (old[data->old_needle] != *symbol && old[data->old_needle] != '\0' \
 		&& old[data->old_needle] != '\'' && old[data->old_needle] != '\"')
 	{
@@ -53,6 +56,7 @@ static char	*expand_loop(t_format *data, char *old, char *symbol)
 			&& old[data->old_needle] != '$')
 			break ;
 	}
+	printf("SIZE:%d\n", var_len);
 	var[var_len] = '\0';
 	return (var);
 }

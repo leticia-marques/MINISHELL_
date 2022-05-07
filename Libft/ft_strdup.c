@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 19:20:58 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 22:13:24 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:34:23 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *s)
 	size = ft_strlen(s);
 	new_word = malloc(sizeof(char) * (size + 1));
 	if (!new_word)
-		return (0);
+		return (NULL);
 	size = 0;
 	while (s[size] != '\0')
 	{

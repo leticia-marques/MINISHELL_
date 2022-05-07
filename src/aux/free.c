@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 23:59:54 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 00:00:00 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:12:16 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	free_node(t_node **node)
 		free_node(&aux);
 		aux = tmp;
 	}
+	if ((*node)->val)
+		free((*node)->val);
 	(*node)->val = NULL;
 	free((*node));
 	(*node) = NULL;
@@ -71,6 +73,8 @@ void	free_cmd(char **command)
 
 void	free_vars_and_holder(t_token_holder *holder)
 {
+	if (g_vars->n_env == 1)
+		ft_split_free(g_vars->env);
 	if (g_vars->line != NULL)
 		free(g_vars->line);
 	if (g_vars->prompt != NULL)

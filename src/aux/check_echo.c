@@ -6,19 +6,22 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:14:19 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 18:58:00 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:34:10 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
 
-static int	echo_loop(int fd[2], int position, t_node *aux)
+static int	echo_loop(int fd[2], int position, t_node *aux, t_node **cmd)
 {
 	int	i;
 
 	i = 0;
-	while (aux && ft_strcmp(aux->val, ">") != 0)
+	while (aux )
 	{
+		if((*cmd)->outfile != -1 && (ft_strcmp(aux->val, ">") == 0 \
+			|| ft_strcmp(aux->val, ">>") == 0))
+			break ;
 		if (ft_strcmp(aux->val, "\'") == 0 || \
 			ft_strcmp(aux->val, "\"") == 0)
 		{
@@ -32,9 +35,15 @@ static int	echo_loop(int fd[2], int position, t_node *aux)
 			continue ;
 		}
 		if (position)
+		{
 			ft_putstr_fd(aux->val, 1);
+			ft_putchar_fd(' ', 1);
+		}
 		else
+		{
 			ft_putstr_fd(aux->val, fd[1]);
+			ft_putchar_fd(' ', fd[1]);
+		}
 		aux = aux->next;
 	}
 	return (i);
@@ -47,11 +56,16 @@ int	check_echo(t_node **cmd, t_input **src)
 	int		fd[2];
 	int		position;
 
+	if ((*cmd)->outfile == -1)
+	{
+		dup2(g_vars->save_stdin, 0);
+		dup2(g_vars->save_stdout, 1);
+	}
 	position = (*src)->position >= (*src)->line_size;
 	if (pipe(fd) == -1)
 		perror("error:");
 	aux = (*cmd)->first_arg->next;
-	i = echo_loop(fd, position, aux);
+	i = echo_loop(fd, position, aux, cmd);
 	if (i != 1)
 	{
 		if (position)

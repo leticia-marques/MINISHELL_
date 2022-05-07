@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 02:13:41 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:38:40 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/06 18:21:29 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,5 @@ void	init_vars(char **envp)
 	getcwd(g_vars->old_dir, 1024);
 	getcwd(g_vars->path, 1024);
 	get_prompt();
-	g_vars->count = 1;
+	g_vars->n_env = 0;
 }

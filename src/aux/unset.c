@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinacio- < jinacio-@student.42sp.org.br    +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:31:03 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/03 23:42:01 by jinacio-         ###   ########.fr       */
+/*   Updated: 2022/05/06 19:44:20 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	unset_var(char *var)
 {
+
 	int		i;
 	int		j;
 	char	**new_env;
@@ -22,7 +23,7 @@ static void	unset_var(char *var)
 	i = 0;
 	while (g_vars->env[i] != NULL)
 		i++;
-	new_env = (char **)malloc(sizeof(char *) * i);
+	new_env = malloc(sizeof(char *) * i);
 	if (!new_env)
 		return ;
 	i = -1;
@@ -32,7 +33,10 @@ static void	unset_var(char *var)
 			ft_strncmp(var, g_vars->env[i], ft_strlen(var)) != 0)
 				new_env[++j] = ft_strdup(g_vars->env[i]);
 	}
-	new_env[j++] = NULL;
+	new_env[++j] = NULL;
+	if (g_vars->n_env == 1)
+		ft_split_free(g_vars->env);
+	g_vars->n_env = 1;
 	g_vars->env = new_env;
 }
 

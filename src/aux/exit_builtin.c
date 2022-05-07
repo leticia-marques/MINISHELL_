@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/04 18:12:29 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 17:25:29 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
 			printf("exit\n");
 			printf("bash: exit: %s: ", cmd->first_arg->next->val);
 			printf("numeric argument required\n");
+			free_node(&cmd);
+			free_vars_and_holder(holder);
+			free(src->line);
 			exit(2);
 		}
 	}

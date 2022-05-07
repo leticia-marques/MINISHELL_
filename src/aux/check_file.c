@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/05 23:35:45 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 20:26:05 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,13 @@ static	void	open_file(t_node **aux, t_node **cmd)
 	infile = (*aux)->next;
 	redirect = (*aux);
 	*aux = (*aux)->next->next;
-	prev->next = *aux;
+	if (prev)
+		prev->next = *aux;
 	if ((*aux))
 		(*aux)->prev = prev;
 	free_node(&infile);
 	free_node(&redirect);
+	(*cmd)->args-=2;
 }
 
 static void	has_outfile(t_node **cmd)
@@ -122,20 +124,24 @@ static void	has_outfile(t_node **cmd)
 	t_node	*aux;
 
 	aux = (*cmd)->first_arg;
-	while (aux)
+	while (aux != NULL)
 	{
+		if (!aux->next)
+			break ;
 		if (!ft_strcmp(aux->val, ">") || !ft_strcmp(aux->val, ">>"))
 			open_file(&aux, cmd);
+		if (!aux)
+			break;
 		if (aux)
 		{
 			if (!ft_strcmp(aux->val, ">") || !ft_strcmp(aux->val, ">>"))
 				continue ;
 		}
-		if (aux)
-		{
-			if (aux->next)
-				aux = aux->next;
-		}
+		// if (aux != NULL)
+		// {
+			// if (aux->next)
+		aux = aux->next;
+		// }
 	}
 }
 
