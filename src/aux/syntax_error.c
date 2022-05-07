@@ -6,11 +6,24 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 19:55:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 23:08:30 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 23:11:20 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"minishell.h"
+
+int	is_all_space()
+{
+	int	i;
+	i = -1;
+	while(g_vars->line[++i])
+	{
+		if (g_vars->line[i] != ' ')
+			return (0);
+	}
+	free(g_vars->line);
+	return (1);
+}
 
 static int	check_string_util(char *str, int *i, char c)
 {

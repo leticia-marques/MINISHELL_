@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 23:08:22 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 23:11:07 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,6 @@ static void	read_prompt_aux(t_token_holder *holder)
 	printf("exit\n");
 	exit(5);
 }
-
-static int	is_all_space()
-{
-	int	i;
-	i = -1;
-	while(g_vars->line[++i])
-	{
-		if (g_vars->line[i] != ' ')
-			return (0);
-	}
-	free(g_vars->line);
-	return (1);
-}
-
 
 static void	read_prompt(t_token_holder *holder)
 {

@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 20:49:55 by jinacio-          #+#    #+#             */
-/*   Updated: 2022/05/06 23:09:09 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 23:11:31 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	error_infile(t_node **cmd, int code);
 void	command_not_found(char *cmd, char **splited_path);
 void	redirect_error(char *symbol);
 int		check_string(char *str);
+int		is_all_space();
 
 
 //free
