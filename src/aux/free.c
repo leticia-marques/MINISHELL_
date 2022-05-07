@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/05 23:59:54 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 18:12:16 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:43:43 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,6 @@
 
 void	free_node(t_node **node)
 {
-	// t_node	*aux;
-	// t_node	*tmp;
-
-	// if (!(*node))
-	// 	return ;
-	// aux = (*node)->first_arg;
-	// while (aux)
-	// {
-	// 	tmp = aux->next;
-	// 	if (aux->val)
-	// 		free(aux->val);
-	// 	aux->val = NULL;
-	// 	free(aux);
-	// 	aux = NULL;
-	// 	aux = tmp;
-	// }
-	// free((*node));
-	// (*node) = NULL;
 	t_node	*aux;
 	t_node	*tmp;
 

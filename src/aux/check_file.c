@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:14:48 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 23:07:48 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:42:08 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ static	void	open_file(t_node **aux, t_node **cmd)
 	if ((*cmd)->outfile != -1)
 		close((*cmd)->outfile);
 	if (!ft_strcmp((*aux)->val, ">"))
-		(*cmd)->outfile = open((*aux)->next->val, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+		(*cmd)->outfile = open((*aux)->next->val, O_WRONLY | O_CREAT \
+		| O_TRUNC, 0777);
 	else
-		(*cmd)->outfile = open((*aux)->next->val, O_WRONLY | O_CREAT | O_APPEND, 0777);
+		(*cmd)->outfile = open((*aux)->next->val, O_WRONLY | O_CREAT \
+		| O_APPEND, 0777);
 	if ((*cmd)->outfile == -1)
 		error_infile(cmd, 2);
 	prev = (*aux)->prev;
@@ -36,7 +38,7 @@ static	void	open_file(t_node **aux, t_node **cmd)
 		(*aux)->prev = prev;
 	free_node(&infile);
 	free_node(&redirect);
-	(*cmd)->args-=2;
+	(*cmd)->args -= 2;
 }
 
 static void	has_outfile(t_node **cmd)
@@ -51,7 +53,7 @@ static void	has_outfile(t_node **cmd)
 		if (!ft_strcmp(aux->val, ">") || !ft_strcmp(aux->val, ">>"))
 			open_file(&aux, cmd);
 		if (!aux)
-			break;
+			break ;
 		if (aux)
 		{
 			if (!ft_strcmp(aux->val, ">") || !ft_strcmp(aux->val, ">>"))
@@ -63,7 +65,6 @@ static void	has_outfile(t_node **cmd)
 
 int	check_outfile(t_node **cmd, int i, t_input *src)
 {
-
 	has_outfile(cmd);
 	if ((*cmd)->outfile != -1 && i != 0)
 	{

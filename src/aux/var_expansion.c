@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 17:03:56 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 22:43:04 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:48:27 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ static char	*find_var(char *var)
 			{
 				if (g_vars->env[i][size] == '=')
 				{
-					line = g_vars->env[i] + ( size + 1);
-					// printf("Line:%s\n", var);
+					line = g_vars->env[i] + (size + 1);
 					break ;
 				}
 			}

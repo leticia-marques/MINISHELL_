@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 17:44:21 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:27:00 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	check_argv(t_node **cmd, t_input *src, t_token_holder *holder)
 		i = here_doc_call(cmd, holder, src);
 	else if (ft_strncmp(str, "<", 1) == 0)
 		i = infile_outfile_call(cmd, src);
-	else if (has_redirection(cmd) == 0  )
+	else if (has_redirection(cmd) == 0)
 		i = check_outfile(cmd, 1, src);
 	else
 	{

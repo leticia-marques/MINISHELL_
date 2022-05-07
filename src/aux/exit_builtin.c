@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 17:25:29 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:26:17 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,11 @@ int	check_exit_expansion(t_node **cmd)
 	return (1);
 }
 
-int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
+static void	exit_builtin_loop(t_node *cmd, t_token_holder *holder, t_input *src)
 {
 	int	i;
-	int	exit_code;
 
 	i = -1;
-	if (cmd->args > 2)
-	{
-		g_vars->exit_code = 127;
-		printf("bash: exit: too many arguments");
-		return (0);
-	}
 	while (cmd->first_arg->next->val[++i])
 	{
 		if (ft_isdigit(cmd->first_arg->next->val[i]) == 0)
@@ -60,6 +53,19 @@ int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
 			exit(2);
 		}
 	}
+}
+
+int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
+{
+	int	exit_code;
+
+	if (cmd->args > 2)
+	{
+		g_vars->exit_code = 127;
+		printf("bash: exit: too many arguments");
+		return (0);
+	}
+	exit_builtin_loop(cmd, holder, src);
 	g_vars->exit_code = ft_atoi(cmd->first_arg->next->val);
 	exit_code = g_vars->exit_code;
 	free_node(&cmd);

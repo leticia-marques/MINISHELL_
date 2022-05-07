@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 20:31:03 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 19:44:20 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:47:44 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void	unset_var(char *var)
 {
-
 	int		i;
 	int		j;
 	char	**new_env;

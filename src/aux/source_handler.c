@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   source_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 18:18:03 by rtakeshi          #+#    #+#             */
-/*   Updated: 2022/05/06 00:09:18 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/07 04:44:40 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,8 @@ void	go_back_a_char(t_input *src)
 
 char	next_char(t_input *src)
 {
-	// char	pos;
-
-	// pos = 0;
 	if (src->position == -2)
 		src->position = -1;
-	// else
-	// 	pos = src->line[src->position];
-	// (void)pos;
 	if (++src->position >= src->line_size)
 	{
 		src->position = src->line_size;
