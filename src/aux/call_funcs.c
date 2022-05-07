@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 01:18:44 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 17:44:27 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 23:09:25 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	here_doc_call(t_node **cmd, t_token_holder *holder, t_input *src)
 	aux = (*cmd)->first_arg;
 	while (aux)
 	{
-		if (ft_strcmp(aux->val, "<<") == 0 && check_syntax_error(cmd) != 0)
+		if (ft_strcmp(aux->val, "<<") == 0)
 		{
-			check_outfile(cmd, 0, src);
+			check_outfile(cmd, 1, src);
 			here_doc(aux->next->val, holder, cmd, src);
 			if (aux->prev != NULL && (*cmd)->outfile == -1)
 			{

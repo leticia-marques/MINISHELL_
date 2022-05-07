@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 20:06:02 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/06 22:49:03 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	child_process(int fd[2], char *delimiter, t_node **cmd)
 				child_process_aux2(line, fd);
 			else
 				child_process_aux(delimiter, cmd, line, 2);
-			// child_process_aux2(line, fd);
 		}
 		else
 		{
