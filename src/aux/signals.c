@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 23:32:04 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/09 22:54:54 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/09 19:06:20 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,8 @@ void	signal_treatment(void)
 
 void	signal_aborted(int sig)
 {
-	g_vars->exit_code = 131;
 	(void)sig;
-	write(1, "Quit (core dumped)\n", 19);
+	write(1, "Quit (core dumped) e coisas\n", 28);
 	return ;
 }
 
