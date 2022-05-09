@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:56:55 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/07 11:20:15 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/09 22:46:12 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	check_builtin(t_node **cmd, t_input *src, t_token_holder *holder)
 	else if (ft_strcmp((*cmd)->first_arg->val, "cd") == 0)
 		return (cd(*cmd));
 	else if (ft_strcmp((*cmd)->first_arg->val, "exit") == 0)
-		exit_builtin(*cmd, holder, src);
+		return (exit_builtin(*cmd, holder, src));
 	else if (ft_strcmp((*cmd)->first_arg->val, "echo") == 0)
 		return (check_echo(cmd, &src));
 	return (1);

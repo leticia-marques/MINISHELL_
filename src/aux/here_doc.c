@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 17:05:40 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/06 22:49:03 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/09 22:38:44 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	child_process_aux(char *delimiter, t_node **cmd, char *line, int n1)
 	{
 		ft_putstr_fd(line, (*cmd)->outfile);
 		ft_putchar_fd('\n', (*cmd)->outfile);
+		if (line)
+			free(line);
 	}
 }
 
@@ -30,6 +32,8 @@ static void	child_process_aux2(char *line, int fd[2])
 {
 	write(fd[1], line, ft_strlen(line));
 	write(fd[1], "\n", 1);
+	if (line)
+		free(line);
 }
 
 static void	child_process(int fd[2], char *delimiter, t_node **cmd)

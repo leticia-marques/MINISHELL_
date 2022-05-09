@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 15:25:49 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/07 11:16:52 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/09 22:16:59 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ static void	parse_and_call_exec(char *line, t_token_holder *holder)
 	{
 		parse_and_call_exec_aux(i, &source, cmd);
 		parse_and_call_exec((char *)(source.line + source.position), holder);
-		if (cmd)
-			free_node(&cmd);
 	}
 }
 
@@ -69,7 +67,6 @@ static void	read_prompt(t_token_holder *holder)
 		if (g_vars->line == NULL)
 		{
 			write(1, "exit\n", 5);
-			printf("Passa aqui\n");
 			break ;
 		}
 		if (check_string(g_vars->line) == 1)
@@ -97,8 +94,6 @@ int	main(int argc, char **argv, char **envp)
 	init_holder(&holder);
 	init_vars(envp);
 	read_prompt(&holder);
-	printf("Passa aqui tbm\n");
-
 	free_vars_and_holder(&holder);
 	rl_clear_history();
 }

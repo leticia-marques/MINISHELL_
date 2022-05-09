@@ -6,7 +6,7 @@
 /*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 01:11:46 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/07 04:26:17 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/09 22:49:01 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,14 @@ int	exit_builtin(t_node *cmd, t_token_holder *holder, t_input *src)
 {
 	int	exit_code;
 
+	exit_builtin_loop(cmd, holder, src);
 	if (cmd->args > 2)
 	{
 		g_vars->exit_code = 127;
-		printf("bash: exit: too many arguments");
+		printf("bash: exit: too many arguments\n");
 		return (0);
 	}
-	exit_builtin_loop(cmd, holder, src);
+	
 	g_vars->exit_code = ft_atoi(cmd->first_arg->next->val);
 	exit_code = g_vars->exit_code;
 	free_node(&cmd);
