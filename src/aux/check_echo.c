@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_echo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:14:19 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/07 04:39:48 by coder            ###   ########.fr       */
+/*   Updated: 2022/05/09 18:36:41 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static int	echo_loop(int fd[2], int position, t_node *aux, t_node **cmd)
 	int	i;
 
 	i = 0;
+	if (ft_strcmp(aux->val, "-n") == 0)
+	{
+		i = 1;
+		aux = aux->next;
+	}
 	while (aux)
 	{
 		if ((*cmd)->outfile != -1 && (ft_strcmp(aux->val, ">") == 0 \
@@ -41,12 +46,6 @@ static int	echo_loop(int fd[2], int position, t_node *aux, t_node **cmd)
 		{
 			free(aux->val);
 			aux->val = ft_strdup("");
-		}
-		if (ft_strcmp(aux->val, "-n") == 0)
-		{
-			i = 1;
-			aux = aux->next;
-			continue ;
 		}
 		echo_loop_util(fd, position, aux);
 		aux = aux->next;
