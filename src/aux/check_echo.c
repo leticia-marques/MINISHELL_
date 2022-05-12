@@ -6,7 +6,7 @@
 /*   By: lemarque <lemarque@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/22 20:14:19 by lemarque          #+#    #+#             */
-/*   Updated: 2022/05/09 18:36:41 by lemarque         ###   ########.fr       */
+/*   Updated: 2022/05/12 16:32:25 by lemarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ static int	echo_loop(int fd[2], int position, t_node *aux, t_node **cmd)
 	int	i;
 
 	i = 0;
-	if (ft_strcmp(aux->val, "-n") == 0)
+	if (aux != NULL)
 	{
-		i = 1;
-		aux = aux->next;
+		if (ft_strcmp(aux->val, "-n") == 0)
+		{
+			i = 1;
+			aux = aux->next;
+		}
 	}
 	while (aux)
 	{
